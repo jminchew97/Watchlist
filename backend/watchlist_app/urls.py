@@ -1,7 +1,7 @@
 #trainer_app.urls
 from django.urls import path
-from .views import 
+from .views import AllWatchlists
 
 urlpatterns = [
-    path('', Sign_up.as_view(), name='watchlists')
+    path('', AllWatchlists.as_view(), name='watchlists')
 ]
