@@ -1,15 +1,15 @@
-from django.contrib.auth import authenticate
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework.status import (
-    HTTP_201_CREATED,
     HTTP_404_NOT_FOUND,
     HTTP_204_NO_CONTENT,
-    HTTP_400_BAD_REQUEST
+    HTTP_400_BAD_REQUEST,
+    HTTP_403_FORBIDDEN,
+    HTTP_500_INTERNAL_SERVER_ERROR
 )
-import json
+
+from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -20,6 +20,8 @@ from .serializers import WatchlistSerializer,MovieSerializer, CreateWatchlistSer
 from .models import Watchlist,Movie
 
 class AllWatchlists(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         
         
@@ -31,16 +33,30 @@ class AllWatchlists(APIView):
         return JsonResponse({"watchlists":data})
     
     def post(self, request):
-        new_watchlist = CreateWatchlistSerializer(data=request.data)
+        try:
+            new_watchlist = CreateWatchlistSerializer(data=request.data)
+            
+            if not new_watchlist.is_valid():
+                return JsonResponse({"message":new_watchlist.errors}, status=HTTP_400_BAD_REQUEST)
+            
+            attempted_user_assigned = request.data["user"]
+            authenticated_user= request.user
+            if authenticated_user.id == attempted_user_assigned or authenticated_user.is_staff:
+                new_watchlist.save()
+                return JsonResponse(new_watchlist.data)
+            
+            if authenticated_user.id != attempted_user_assigned:
+                return JsonResponse({"message":f"watchlist user_id:{attempted_user_assigned} does not match authenticated user id:{authenticated_user.id}"}, status=HTTP_400_BAD_REQUEST)
+            
+            return JsonResponse(new_watchlist.errors, status=HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            print(e)
+            return JsonResponse({"message":"server error processing request"}, status=HTTP_500_INTERNAL_SERVER_ERROR)
         
-        if new_watchlist.is_valid():
-            new_watchlist.save()
-            return JsonResponse(new_watchlist.data)
-        
-        return JsonResponse({"message":new_watchlist.errors}, status=HTTP_400_BAD_REQUEST)
-    
-    
 class SingleWatchlist(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
     def get(self, request, id):
         
         try:
@@ -48,9 +64,11 @@ class SingleWatchlist(APIView):
             if watchlist:
                 data = WatchlistSerializer(watchlist).data
                 return JsonResponse({"data":data})
+            
         except Exception as e:
             print(e)
-            return Response(f"No watchlist with id:{id} or watchlist is set to private", status=HTTP_404_NOT_FOUND)
+            return JsonResponse({"message":f"No watchlist with id:{id} or watchlist is set to private"}, status=HTTP_404_NOT_FOUND)
+        
     def put(self, request, id):
         watchlist = get_object_or_404(Watchlist, id=id)
         
@@ -58,9 +76,21 @@ class SingleWatchlist(APIView):
         
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=HTTP_400_BAD_REQUEST)
+    
     def delete(self,request,id):
-        watchlist = get_object_or_404(Watchlist, id=id)
-        watchlist.delete()
-        return Response(status=HTTP_204_NO_CONTENT)
+        try:
+            # get user id
+            authenticated_user= request.user
+            
+            watchlist = get_object_or_404(Watchlist, id=id)
+            if authenticated_user.id != watchlist.user.id and not authenticated_user.is_staff:
+                return JsonResponse({"message":f"You do not have authorization to delete this watchlist.{authenticated_user.id}!={watchlist.user.id}"},status=HTTP_403_FORBIDDEN)
+            
+            watchlist.delete()
+            print("working")
+            return JsonResponse({"message":"Watchlist was successfully deleted"},status=HTTP_204_NO_CONTENT)
+        except Exception as e:
+            print(e)
+            return JsonResponse({"message":"server error processing request"}, status=HTTP_500_INTERNAL_SERVER_ERROR)       
