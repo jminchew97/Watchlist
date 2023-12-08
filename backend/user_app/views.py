@@ -16,7 +16,6 @@ class Sign_up(APIView):
     def post(self, request):
         print(request.data)
         
-        
         user = User.objects.create_user(**request.data)
         print(user)
         token = Token.objects.create(user=user)

@@ -1,5 +1,5 @@
 from rest_framework import serializers # import serializers from DRF
-from .models import Watchlist, WatchlistItem, Movie
+from .models import Watchlist, Movie # WatchlistItem,
 
 
 class MovieSerializer(serializers.ModelSerializer):
@@ -7,14 +7,21 @@ class MovieSerializer(serializers.ModelSerializer):
         model = Movie
         fields = '__all__'
         
-class WatchlistItemSerializer(serializers.ModelSerializer):
-    movie = MovieSerializer()  
-    class Meta:
-        model = WatchlistItem
-        fields = '__all__'
-        
 class WatchlistSerializer(serializers.ModelSerializer):
-    watchlist_items = WatchlistItemSerializer(many=True, read_only=True)
+    movies = MovieSerializer(many=True)
+    
     class Meta:
         model = Watchlist
-        fields = "__all__"
+        fields = ["id", "name", "user", "movies", "isPublic"]
+        read_only_fields = ['user', 'id']
+class CreateWatchlistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Watchlist
+        fields = ["id", "name", "user", "isPublic"]
+        read_only_fields = ['id']
+        
+class EditWatchlistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Watchlist
+        fields = ["id", "user","name", "isPublic","movies"]
+        read_only_fields = ['user', 'id']
