@@ -14,6 +14,7 @@ class WatchlistSerializer(serializers.ModelSerializer):
         model = Watchlist
         fields = ["id", "name", "user", "movies", "isPublic"]
         read_only_fields = ['user', 'id']
+        
 class CreateWatchlistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Watchlist

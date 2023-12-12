@@ -10,8 +10,9 @@ from rest_framework.status import (
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-
-
+from django.http import JsonResponse
+from watchlist_app.models import Watchlist
+from watchlist_app.serializers import WatchlistSerializer
 class Sign_up(APIView):
     def post(self, request):
         print(request.data)
@@ -30,7 +31,7 @@ class Log_in(APIView):
         user = authenticate(username=username, password=password)
         if user:
             token, created = Token.objects.get_or_create(user=user)
-            return Response({"token": token.key, "user": user.username})
+            return Response({"token": token.key, "user": user.username, "id":user.id})
         else:
             return Response("No user matching credentials", status=HTTP_404_NOT_FOUND)
 
@@ -48,3 +49,24 @@ class Log_out(APIView):
     def post(self, request):
         request.user.auth_token.delete()
         return Response(status=HTTP_204_NO_CONTENT)
+    
+class GetWatchlistByUser(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, id):
+        try:
+            watchlist = Watchlist.objects.filter( user_id=id)
+            
+            if watchlist:
+                data = WatchlistSerializer(watchlist, many=True).data
+                print(data)
+                return JsonResponse({"data":data})
+            else:
+                return JsonResponse({"message":f"User with id:{id} has no watchlists."})
+        except Exception as e:
+            print(e)
+            return JsonResponse({"message":f"Error"}, status=HTTP_404_NOT_FOUND)
+        
+    
+    
