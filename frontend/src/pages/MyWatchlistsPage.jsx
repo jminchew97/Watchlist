@@ -9,15 +9,15 @@ const MyWatchlistsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
+      const user = localStorage.getItem("user");
       api.defaults.headers.common["Authorization"] = `Token ${token}`;
-      const response = await api.get(`user/${user["user_id"]}/watchlists/`);
+      const response = await api.get(`user/${user}/watchlists/`);
       // console.log(response.data.data);
       setResponseData(response.data.data);
-      console.log(responseData)
+      console.log(responseData);
     };
-    if (user) {
-      fetchData();
-    }
+
+    fetchData();
   }, []);
 
   return (
@@ -26,9 +26,10 @@ const MyWatchlistsPage = () => {
         <ul>
           {responseData.map((item, index) => (
             <WatchlistCard
-            key={index}
-            name={item.name}
-            movies={item.movies}
+              key={index}
+              name={item.name}
+              movies={item.movies}
+              watchlistId={item.id}
             />
           ))}
         </ul>

@@ -22,6 +22,8 @@ const LoginForm = () => {
         let user = response.data.user;
         let token = response.data.token;
         let id = response.data.id
+
+        localStorage.setItem("user", id)
         localStorage.setItem("token", token);
         api.defaults.headers.common["Authorization"] = `Token ${token}`;
         console.log(api.defaults.headers.common["Authorization"])

@@ -14,7 +14,7 @@ function App() {
           <li>
             <Link to="/about">About</Link>
           </li>
-          {!user ? (
+          {!localStorage.getItem("user") ? (
             <>
               <li>
                 <Link to="/login">Login</Link>
@@ -24,9 +24,14 @@ function App() {
               </li>
             </>
           ) : (
-            <li>
-              <Link to="/logout">Logout</Link>
-            </li>
+            <>
+              <li>
+                <Link to="/logout">Logout</Link>
+              </li>
+              <li>
+                <Link to="/mywatchlists">MyWatchlist</Link>
+              </li>
+            </>
           )}
         </ul>
       </nav>

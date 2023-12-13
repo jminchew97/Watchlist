@@ -7,38 +7,43 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import MyWatchlistsPage from "./pages/MyWatchlistsPage";
 import LogoutPage from "./pages/LogoutPage";
+import WatchlistPage from "./pages/WatchlistPage";
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <App/>,
-        children: [
-            {
-                index:true,
-                element:<HomePage/>
-            },
-            {
-                path:"about/",
-                element:<AboutPage/>
-            },
-            {
-                path:"signup/",
-                element:<SignupPage/>
-            },
-            {
-                path:"login/",
-                element:<LoginPage/>
-            },
-            {
-                path:"mywatchlists/",
-                element:<MyWatchlistsPage/>
-            },
-            {
-                path:"logout/",
-                element:<LogoutPage/>
-            }
-        ],
-        errorElement: <NotFoundPage/>
-    }
-])
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "about/",
+        element: <AboutPage />,
+      },
+      {
+        path: "signup/",
+        element: <SignupPage />,
+      },
+      {
+        path: "login/",
+        element: <LoginPage />,
+      },
+      {
+        path: "mywatchlists/",
+        element: <MyWatchlistsPage />,
+      },
+      {
+        path: "logout/",
+        element: <LogoutPage />,
+      },
+      {
+        path: "watchlist/:id",
+        element: <WatchlistPage />,
+      },
+    ],
+    errorElement: <NotFoundPage />,
+  },
+]);
 
-export default router
+export default router;

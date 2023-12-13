@@ -60,7 +60,7 @@ class SingleWatchlist(APIView):
     def get(self, request, id):
         
         try:
-            watchlist = Watchlist.objects.get(isPublic=True, id=id)
+            watchlist = Watchlist.objects.get(id=id)
             if watchlist:
                 data = WatchlistSerializer(watchlist).data
                 return JsonResponse({"data":data})
