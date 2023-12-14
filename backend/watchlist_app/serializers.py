@@ -1,12 +1,8 @@
 from rest_framework import serializers # import serializers from DRF
 from .models import Watchlist, Movie # WatchlistItem,
+from movieapi_app.serializers import MovieSerializer
 
 
-class MovieSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Movie
-        fields = '__all__'
-        
 class WatchlistSerializer(serializers.ModelSerializer):
     movies = MovieSerializer(many=True)
     

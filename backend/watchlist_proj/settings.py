@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'user_app',
     'watchlist_app',
+    'movieapi_app'
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
