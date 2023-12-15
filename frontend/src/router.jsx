@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import MyWatchlistsPage from "./pages/MyWatchlistsPage";
 import LogoutPage from "./pages/LogoutPage";
 import WatchlistPage from "./pages/WatchlistPage";
+import ExplorePage from "./pages/ExplorePage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "watchlist/:id",
         element: <WatchlistPage />,
+      },
+      {
+        path: "explore/",
+        element: <ExplorePage/>,
       },
     ],
     errorElement: <NotFoundPage />,

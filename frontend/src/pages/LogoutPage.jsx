@@ -13,6 +13,7 @@ const LogoutPage = () => {
     useEffect(() => {
       setUser(null)
       localStorage.removeItem("token")
+      localStorage.removeItem("user")
       delete api.defaults.headers.common["Authorization"]
       navigate("/login")
 

@@ -54,6 +54,7 @@ class AllWatchlists(APIView):
             return JsonResponse({"message":"server error processing request"}, status=HTTP_500_INTERNAL_SERVER_ERROR)
         
 class SingleWatchlist(APIView):
+
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     
@@ -94,3 +95,29 @@ class SingleWatchlist(APIView):
         except Exception as e:
             print(e)
             return JsonResponse({"message":"server error processing request"}, status=HTTP_500_INTERNAL_SERVER_ERROR)       
+
+class MovieInWatchlist(APIView):
+
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+  
+    def put(self, request, id):
+        data = request.data['data']
+        watchlist_id = id
+        watchlist = get_object_or_404(Watchlist, id=watchlist_id)
+        current_movies = list([x.id for x in watchlist.movies.all()])
+        print(watchlist.movies.all())
+        movie = Movie.objects.filter(name=data['name'], release_date=data["release_date"])
+        if not movie.exists():
+            # create movie in database
+            print("created movie")
+            movie = Movie.objects.create(**data)
+            movie_data = MovieSerializer(movie)
+        else:
+            movie = movie[0]
+        
+        watchlist.movies.add(movie)
+        print(watchlist.movies.all())
+        
+        return JsonResponse({"message":True})
+    

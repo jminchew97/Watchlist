@@ -3,7 +3,8 @@ import { Outlet, Link } from "react-router-dom";
 import { React, useState } from "react";
 function App() {
   const [user, setUser] = useState(null);
-
+  const [showWatchlistModal, setShowWatchlistModal] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null)
   return (
     <>
       <nav>
@@ -31,12 +32,26 @@ function App() {
               <li>
                 <Link to="/mywatchlists">MyWatchlist</Link>
               </li>
+              <li>
+                <Link to="/explore">Explore</Link>
+              </li>
             </>
           )}
         </ul>
       </nav>
 
-      <Outlet context={{ user, setUser }} />
+      <Outlet
+        context={
+          { 
+          user, 
+          setUser, 
+          showWatchlistModal, 
+          setShowWatchlistModal,
+          selectedMovie, 
+          setSelectedMovie 
+        }
+      }
+      />
     </>
   );
 }
