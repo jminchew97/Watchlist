@@ -102,22 +102,34 @@ class MovieInWatchlist(APIView):
     permission_classes = [IsAuthenticated]
   
     def put(self, request, id):
+        """
+        Add a movie to watchlist
+        """
         data = request.data['data']
         watchlist_id = id
         watchlist = get_object_or_404(Watchlist, id=watchlist_id)
         current_movies = list([x.id for x in watchlist.movies.all()])
-        print(watchlist.movies.all())
+        
+        
+       
         movie = Movie.objects.filter(name=data['name'], release_date=data["release_date"])
+        """
+        If the movie does not exist we will create a new movie object in our database.
+        """
         if not movie.exists():
             # create movie in database
-            print("created movie")
             movie = Movie.objects.create(**data)
             movie_data = MovieSerializer(movie)
         else:
             movie = movie[0]
         
         watchlist.movies.add(movie)
-        print(watchlist.movies.all())
         
-        return JsonResponse({"message":True})
-    
+        return JsonResponse({"message":True}) #TODO fix this
+    def delete(self, request,watchlist_id, movie_id):
+        """delete a movie from a watchlist"""
+        watchlist = get_object_or_404(Watchlist, id=watchlist_id)
+        movie = get_object_or_404(Movie, id=movie_id)
+        
+        watchlist.movies.remove(movie)
+        return JsonResponse({"message":"true"})

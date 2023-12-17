@@ -5,6 +5,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [showWatchlistModal, setShowWatchlistModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null)
+  
   return (
     <>
       <nav>
