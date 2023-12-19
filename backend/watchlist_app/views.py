@@ -126,6 +126,7 @@ class MovieInWatchlist(APIView):
         watchlist.movies.add(movie)
         
         return JsonResponse({"message":True}) #TODO fix this
+    
     def delete(self, request,watchlist_id, movie_id):
         """delete a movie from a watchlist"""
         watchlist = get_object_or_404(Watchlist, id=watchlist_id)

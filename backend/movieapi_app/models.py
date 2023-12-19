@@ -9,5 +9,6 @@ class Movie(models.Model):
     )
     release_date = models.DateField()
     summary = models.CharField(
-        max_length=255,
+        max_length=1000,
         )
+    img_src = models.CharField(max_length=255, blank=True, null=True)
