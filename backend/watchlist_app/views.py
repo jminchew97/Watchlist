@@ -16,7 +16,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
-from .serializers import WatchlistSerializer,MovieSerializer, CreateWatchlistSerializer, EditWatchlistSerializer
+from .serializers import WatchlistSerializer,MovieSerializer, CreateWatchlistSerializer, EditWatchlistSerializer, AllWatchlistSerializer
 from .models import Watchlist,Movie
 
 class AllWatchlists(APIView):
@@ -27,7 +27,7 @@ class AllWatchlists(APIView):
         
         watchlists = Watchlist.objects.filter(isPublic=True)
         
-        data = WatchlistSerializer(watchlists, many=True).data
+        data = AllWatchlistSerializer(watchlists, many=True).data
         
         # Return the JSON response
         return JsonResponse({"watchlists":data})

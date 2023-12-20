@@ -13,7 +13,7 @@ const SearchBar = ({ onSearch }) => {
 
   return (
     <Form onSubmit={handleSearch} inline>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" name="searchTerm" />
+      <FormControl type="text" placeholder="Search" autoComplete="off" className="mr-sm-2" name="searchTerm" />
       <Button type="submit" variant="outline-success">Search</Button>
     </Form>
   );

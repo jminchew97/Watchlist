@@ -15,5 +15,8 @@ class User(AbstractUser):
         blank=False,
         unique=True
         )
+    profile_picture = models.CharField(
+        max_length=255
+    )
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []

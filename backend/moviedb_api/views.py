@@ -17,7 +17,7 @@ import requests
 class SearchForMovie(APIView):
     # authentication_classes = [TokenAuthentication]
     # permission_classes = [IsAuthenticated]
-    import requests
+
 
     
     def get(self, request, search_string):

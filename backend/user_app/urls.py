@@ -8,4 +8,5 @@ urlpatterns = [
     path('info/', Info.as_view(), name='info'),
     path('logout/', Log_out.as_view(), name='logout'),
     path("<int:id>/watchlists/", GetWatchlistByUser.as_view(), name="user_watchlists")
+    
 ]

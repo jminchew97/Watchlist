@@ -41,6 +41,7 @@ const CreateWatchlist = (props) => {
                   type="text"
                   value={watchlistName}
                   onChange={(e) => setWatchlistName(e.target.value)}
+                  autoComplete='off'
                 />
               </Form.Group>
               <Form.Group controlId="isPublic">
