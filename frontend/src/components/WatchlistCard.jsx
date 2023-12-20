@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Card, Button, Row, Col} from "react-bootstrap";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import api from "../utilities.jsx";
 const WatchlistCard = (props) => {
   const {
@@ -10,11 +10,14 @@ const WatchlistCard = (props) => {
     movies,
     key,
     watchlistId,
-    myWatchlistData,
-    setMyWatchlistData,
+    setAccessWatchlistData,
+    accessWatchlistData,
   } = props;
+  // const {accessWatchlistData,
+  //   setAccessWatchlistData} = useOutletContext()
   const navigate = useNavigate();
-  const firstThreeMovies = movies.slice(0, 2);
+
+  // const firstThreeMovies = movies.slice(0, 2);
 
   const handleCardClick = () => {
     console.log(`Clicked a watchlist with id:${watchlistId}`);
@@ -24,46 +27,62 @@ const WatchlistCard = (props) => {
   const handleDelete = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log("CALLING DELETE");
-    const user = localStorage.getItem("user");
+    const isConfirmed = window.confirm(`Are you sure you want to delete: ${name}?`);
+
+    if (isConfirmed) {
+      const user = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
     api.defaults.headers.common["Authorization"] = `Token ${token}`;
-    console.log(watchlistId);
+
     const response = await api.delete(`watchlist/${watchlistId}`);
 
     if (response.status == 204) {
-      console.log("before",myWatchlistData);
-      const updatedList = myWatchlistData.filter(
-        (item) => item !== watchlistId
+      console.log("before", accessWatchlistData);
+      const updatedList = accessWatchlistData.filter(
+        (item) => item.id !== watchlistId
       );
-
-      // Update the state with the new array
-      setMyWatchlistData(updatedList);
-      console.log("after",myWatchlistData);
+      setAccessWatchlistData(updatedList);
+      console.log("after", accessWatchlistData);
+    } else {
+      // Your logic for canceled action
+      console.log('Canceled action');
+    }
+    
     }
   };
   return (
     <Card
       data-watchlist-id={watchlistId}
-      bg="dark"
-      text="white"
+      bg="light"
+      text="black"
       style={{ width: "18rem" }}
       onClick={handleCardClick}
     >
       <Card.Header as="h5">{name}</Card.Header>
       <Card.Body>
-        <Card.Text>
-          <ul>
-            {firstThreeMovies.map((item, index) => (
-              <li key={index}>{item.name}</li>
+        <div className="flex-container">
+        <Row>
+          {
+            movies ?
+            <>
+            {movies.map((item, index) => (
+              <img className="inside-watchlist-card" key={index} src={item["img_src"]}></img>
             ))}
-          </ul>
-          <Button variant="danger" onClick={(e) => handleDelete(e)}>
-            Delete
-          </Button>
-        </Card.Text>
+            </> :
+            <h1>empty</h1>
+
+          }
+        
+        </Row>
+        
+        </div>
+
+        <Card.Text></Card.Text>
       </Card.Body>
+      <Button variant="danger" onClick={(e) => handleDelete(e)}>
+        Delete
+      </Button>
     </Card>
   );
 };

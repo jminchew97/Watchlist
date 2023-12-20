@@ -1,56 +1,65 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import api from "../utilities.jsx"
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { useOutletContext } from 'react-router-dom';
+import api from '../utilities.jsx';
+
 const CreateWatchlist = (props) => {
   const [watchlistName, setWatchlistName] = useState('');
   const [isPublic, setIsPublic] = useState(false);
-  const {myWatchlistData, setMyWatchlistData} = props
-  const handleCreateWatchlist = async () => {
+  const {setDataTrigger,dataTrigger} = useOutletContext()
+  const handleCreateWatchlist = async (e) => {
+    e.preventDefault();
+    const user = Number(localStorage.getItem('user'));
+    const token = localStorage.getItem('token');
 
-
-    const user = Number(localStorage.getItem("user"));
-    const token = localStorage.getItem("token");
-    
-    api.defaults.headers.common["Authorization"] = `Token ${token}`;
+    api.defaults.headers.common['Authorization'] = `Token ${token}`;
     const data = {
-      name:watchlistName,
-      user:user,
-      isPublic:isPublic
-      }
-      console.log(data)
-    const response = await api.post("watchlist/", data)
-    
-    if (response.status == 200){
-      setMyWatchlistData(...myWatchlistData, response.data["id"])
+      name: watchlistName,
+      user: user,
+      isPublic: isPublic,
+    };
+
+    const response = await api.post('watchlist/', data);
+
+    if (response.status === 200) {
+      props.setAccessWatchlistData([...props.accessWatchlistData, response.data]);
+      setDataTrigger(dataTrigger+1)
     }
+    
   };
 
   return (
-    <div>
-      <h2>Create a New Watchlist</h2>
-      <Form>
-        <Form.Group controlId="watchlistName">
-          <Form.Label>Watchlist Name:</Form.Label>
-          <Form.Control
-            type="text"
-            value={watchlistName}
-            onChange={(e) => setWatchlistName(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group controlId="isPublic">
-          <Form.Check
-            type="checkbox"
-            label="Public Watchlist"
-            checked={isPublic}
-            onChange={(e) => setIsPublic(e.target.checked)}
-          />
-        </Form.Group>
+    <Container className="mt-5">
+      <Row className="justify-content-center">
+        <Col md={6}>
+          <div className="p-4 border rounded bg-light">
+            <h2>Create a New Watchlist</h2>
+            <Form>
+              <Form.Group controlId="watchlistName">
+                <Form.Label>Watchlist Name:</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={watchlistName}
+                  onChange={(e) => setWatchlistName(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="isPublic">
+                <Form.Check
+                  type="checkbox"
+                  label="Public Watchlist"
+                  checked={isPublic}
+                  onChange={(e) => setIsPublic(e.target.checked)}
+                />
+              </Form.Group>
 
-        <Button variant="primary" type="button" onClick={handleCreateWatchlist}>
-          Create Watchlist
-        </Button>
-      </Form>
-    </div>
+              <Button variant="dark" type="button" onClick={(e) => handleCreateWatchlist(e)}>
+                Create Watchlist
+              </Button>
+            </Form>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

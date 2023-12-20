@@ -1,0 +1,29 @@
+.flex-container {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-wrap: wrap;
+}
+
+.flex-item {
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.inside-watchlist-card{
+  width:100px;
+}
+
+.watchlist-selection-list{
+  list-style-type: none;
+  padding: 0;
+}
+
+.watchlist-selection-list li {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.watchlist-selection-list li:hover {
+  background-color: #ccc;
+}

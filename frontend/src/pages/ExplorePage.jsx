@@ -4,75 +4,45 @@ import WatchlistModal from "../components/WatchlistModal.jsx";
 import api from "../utilities.jsx";
 import react, { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
-
+import { Container, Row, Col } from "react-bootstrap";
 const ExplorePage = () => {
-  const [watchlists, setWatchlists] = useState(null) 
+  const { accessWatchlistData, setAccessWatchlistData } = useOutletContext();
   const [responseData, setResponseData] = useState(null);
-  
-  useEffect(() => {
-    // Define a function to fetch data
-    const fetchData = async () => {
-      try {
-        // Make an API call or any asynchronous operation to get data
-        const user = localStorage.getItem("user")
-        const token = localStorage.getItem("token");
 
-        
-        api.defaults.headers.common["Authorization"] = `Token ${token}`;
-
-        const response = await api.get(`user/${user}/watchlists/`);
-        setWatchlists(response.data.data)
-        // const result = await response.json();
-
-        // // Update the state with the fetched data
-        // setWatchlists(result);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    // Call the fetchData function
-    fetchData();
-
-    // Optionally, you can return a cleanup function
-    // This function will be called when the component unmounts
-    // return () => {
-    //   // Perform cleanup if needed
-    // };
-  }, []);
   const handleSearch = async (searchTerm) => {
-    const encodedUrl = encodeURI(searchTerm); // "the batman" => "the%20batman"
+    const encodedUrl = encodeURI(searchTerm);
     let response = await api.get(`movieapi/${encodedUrl}`);
-
     setResponseData(response.data.results);
   };
-  
-  return (
-    <>
-      <div>
-        <h1>My Component</h1>
-        <SearchBar onSearch={handleSearch} />
-      </div>
-      <div>
-        <WatchlistModal
-        watchlists={watchlists}
 
-        />
-        {responseData ? (
-          <ul>
-            {responseData.map((item, index) => (
-              // <li key={item.id}>{item.title}</li>
-              <DbMovieCard
-                movie={item}
-                key={index}
-              />
-            ))}
-          </ul>
-        ) : (
-          <></>
-        )}
-      </div>
-    </>
+  return (
+    <Container className="mt-5">
+      <Row className="justify-content-center">
+        <Col md={12} className="text-center">
+          <h1>Search for a movie title</h1>
+          <SearchBar onSearch={handleSearch} />
+        </Col>
+      </Row>
+
+      <Row className="mt-3 justify-content-center">
+        <Col md={12} className="text-center">
+          <WatchlistModal accessWatchlistData={accessWatchlistData} />
+          <div className="flex-container">
+            {responseData ? (
+              <>
+                {responseData.map((item, index) => (
+                  <Col key={index} md={4} className="mb-4">
+                    <DbMovieCard movie={item} />
+                  </Col>
+                ))}
+              </>
+            ) : (
+              <p>No results found.</p>
+            )}
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

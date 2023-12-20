@@ -1,57 +1,101 @@
 import "./App.css";
 import { Outlet, Link } from "react-router-dom";
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
+import api from "./utilities.jsx"
+import { Navbar, Nav } from "react-bootstrap";
 function App() {
   const [user, setUser] = useState(null);
   const [showWatchlistModal, setShowWatchlistModal] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState(null)
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [myWatchlistData, setMyWatchlistData] = useState([]);
+  const [accessWatchlistData, setAccessWatchlistData] = useState([])
+  const [dataTrigger, setDataTrigger] = useState(0)
+  // const user = localStorage.getItem("user")
+  //       const token = localStorage.getItem("token");
+
+  //       api.defaults.headers.common["Authorization"] = `Token ${token}`;
+
+  //       const response = await api.get(`user/${user}/watchlists/`);
+  //       setWatchlists(response.data.data)
+
+  useEffect(() => {
+    const fetchUserWatchlist = async () => {
+      if (localStorage.getItem("user") && localStorage.getItem("token")){
+        const user = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
   
+        api.defaults.headers.common["Authorization"] = `Token ${token}`;
+  
+        const response = await api.get(`user/${user}/watchlists/`);
+        setMyWatchlistData(response.data.data)
+        console.log("set new watchlist data")
+      }
+    
+    };
+
+    fetchUserWatchlist(); // Call the function to initiate the API call
+    
+    // If you need to clean up (e.g., cancel the request) when the component unmounts, return a cleanup function
+    return () => {
+      // Cleanup logic goes here
+    };
+  }, [dataTrigger]);
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
+      <Navbar bg="light" expand="lg">
+      <Navbar.Brand as={Link} to="/">
+        Home
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto">
+          
           {!localStorage.getItem("user") ? (
             <>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/signup">Signup</Link>
-              </li>
+              <Nav.Link as={Link} to="/login">
+                Login
+              </Nav.Link>
+              <Nav.Link as={Link} to="/signup">
+                Signup
+              </Nav.Link>
             </>
           ) : (
             <>
-              <li>
-                <Link to="/logout">Logout</Link>
-              </li>
-              <li>
-                <Link to="/mywatchlists">MyWatchlist</Link>
-              </li>
-              <li>
-                <Link to="/explore">Explore</Link>
-              </li>
+              
+              <Nav.Link as={Link} to="/mywatchlists">
+                MyWatchlist
+              </Nav.Link>
+              <Nav.Link as={Link} to="/explore">
+                Explore
+              </Nav.Link>
+              <Nav.Link
+                as={Link}
+                to="/logout"
+                style={{ color: "red" }}
+              >
+                Logout
+              </Nav.Link>
             </>
           )}
-        </ul>
-      </nav>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
 
       <Outlet
-        context={
-          { 
-          user, 
-          setUser, 
-          showWatchlistModal, 
+        context={{
+          user,
+          setUser,
+          showWatchlistModal,
           setShowWatchlistModal,
-          selectedMovie, 
-          setSelectedMovie 
-        }
-      }
+          selectedMovie,
+          setSelectedMovie,
+          setMyWatchlistData,
+          myWatchlistData,
+          accessWatchlistData, 
+          setAccessWatchlistData,
+          dataTrigger,
+          setDataTrigger
+        }}
       />
     </>
   );
