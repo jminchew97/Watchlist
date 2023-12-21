@@ -1,7 +1,8 @@
 import React from "react";
-import { Card, Button, Row, Col} from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import api from "../utilities.jsx";
+
 const WatchlistCard = (props) => {
   const {
     id,
@@ -16,7 +17,7 @@ const WatchlistCard = (props) => {
   // const {accessWatchlistData,
   //   setAccessWatchlistData} = useOutletContext()
   const navigate = useNavigate();
-
+  const { myWatchlistData } = useOutletContext();
   // const firstThreeMovies = movies.slice(0, 2);
 
   const handleCardClick = () => {
@@ -27,28 +28,29 @@ const WatchlistCard = (props) => {
   const handleDelete = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const isConfirmed = window.confirm(`Are you sure you want to delete: ${name}?`);
+    const isConfirmed = window.confirm(
+      `Are you sure you want to delete: ${name}?`
+    );
 
     if (isConfirmed) {
       const user = localStorage.getItem("user");
-    const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
-    api.defaults.headers.common["Authorization"] = `Token ${token}`;
+      api.defaults.headers.common["Authorization"] = `Token ${token}`;
 
-    const response = await api.delete(`watchlist/${watchlistId}`);
+      const response = await api.delete(`watchlist/${watchlistId}`);
 
-    if (response.status == 204) {
-      console.log("before", accessWatchlistData);
-      const updatedList = accessWatchlistData.filter(
-        (item) => item.id !== watchlistId
-      );
-      setAccessWatchlistData(updatedList);
-      console.log("after", accessWatchlistData);
-    } else {
-      // Your logic for canceled action
-      console.log('Canceled action');
-    }
-    
+      if (response.status == 204) {
+        console.log("before", accessWatchlistData);
+        const updatedList = accessWatchlistData.filter(
+          (item) => item.id !== watchlistId
+        );
+        setAccessWatchlistData(updatedList);
+        console.log("after", accessWatchlistData);
+      } else {
+        // Your logic for canceled action
+        console.log("Canceled action");
+      }
     }
   };
   return (
@@ -62,27 +64,31 @@ const WatchlistCard = (props) => {
       <Card.Header as="h5">{name}</Card.Header>
       <Card.Body>
         <div className="flex-container">
-        <Row>
-          {
-            movies ?
+          {movies ? (
             <>
-            {movies.map((item, index) => (
-              <img className="inside-watchlist-card" key={index} src={item["img_src"]}></img>
-            ))}
-            </> :
+              {movies.slice(0, 4).map((item, index) => (
+                <img
+                  className="inside-watchlist-card"
+                  key={index}
+                  src={item["img_src"]}
+                ></img>
+              ))}
+            </>
+          ) : (
             <h1>empty</h1>
-
-          }
-        
-        </Row>
-        
+          )}
         </div>
 
         <Card.Text></Card.Text>
       </Card.Body>
-      <Button variant="danger" onClick={(e) => handleDelete(e)}>
-        Delete
-      </Button>
+      {user ? <Card.Footer>Created By:{user.username}</Card.Footer> : <></>}
+      {myWatchlistData.some((watchlist) => watchlist.id == watchlistId) ? (
+        <Button variant="danger" onClick={(e) => handleDelete(e)}>
+          Delete
+        </Button>
+      ) : (
+        <></>
+      )}
     </Card>
   );
 };

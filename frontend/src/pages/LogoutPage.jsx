@@ -19,6 +19,7 @@ const LogoutPage = () => {
 
     return () => {
       // Code to run when the component unmounts
+      
     };
   }, []);
  

@@ -26,7 +26,7 @@ const DbMovieCard = (props) => {
       )}
 
       <Card.Body>
-        <Card.Text>{movie.overview}</Card.Text>
+        <Card.Text>{movie.overview.slice(0,255) + "..."}</Card.Text>
         <Card.Text>Release Date:{movie.release_date}</Card.Text>
         <AddToWatchlistButton movie={movie} />
       </Card.Body>

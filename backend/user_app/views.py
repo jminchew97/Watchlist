@@ -18,25 +18,23 @@ import requests
 import html
 class Sign_up(APIView):
     def post(self, request):
-        # print(request.data)
-        
-        # user = User.objects.create_user(**request.data)
-        # print(user)
-        # token = Token.objects.create(user=user)
-        
-        # fetch svg img from pofile picture api
         url = f"https://api.thecatapi.com/v1/images/search"
         headers={"x-api-key":"live_tpjCWW1x5WMR2HKjX57FrUWghN8BUNHVMHNXrYDWn95UKEmtC26NNRmDnDSZKZs3"}
         response = requests.get(url, headers=headers)
+        profile_picture = response.json()[0]["url"]
+        data = request.data
         
-        # print(response.content)
-        # print(html.unescape(response.))
+        data["profile_picture"] = profile_picture
+        print(data)
+        user = User.objects.create_user(**request.data)
         
-        return JsonResponse({"svg_img":mark_safe(response.text)}, content_type='image/svg+xml')
-        # return Response(
-        #     {"user": user.email, "token": token.key}, status=HTTP_201_CREATED
-        # )
-        # return Response(True)
+        token = Token.objects.create(user=user)
+
+        
+        return Response(
+            {"user": user.email, "token": token.key}, status=HTTP_201_CREATED
+        )
+
         
 class Log_in(APIView):
     def post(self, request):

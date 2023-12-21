@@ -27,3 +27,16 @@
 .watchlist-selection-list li:hover {
   background-color: #ccc;
 }
+
+.profile-picture {
+  /* Set the desired size */
+  width: 100px;
+  height: 100px;
+
+  /* Make it circular */
+  border-radius: 50%;
+
+  /* Add a border effect */
+  border: 4px solid #fff; /* You can customize the border color */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow effect */
+}

@@ -13,11 +13,11 @@ class AllWatchlistSerializer(serializers.ModelSerializer):
         read_only_fields = ['user', 'id']
 class WatchlistSerializer(serializers.ModelSerializer):
     movies = MovieSerializer(many=True)
-    
+    user = UserMinimalSerializer()
     class Meta:
         model = Watchlist
         fields = ["id", "name", "user", "movies", "isPublic"]
-        read_only_fields = ['user', 'id']
+        read_only_fields = ['username', 'id', 'profile_picture']
         
 class CreateWatchlistSerializer(serializers.ModelSerializer):
     class Meta:

@@ -2,7 +2,7 @@ import { React, useContext, useEffect, useState } from "react";
 import api from "../utilities.jsx";
 import { useOutletContext, useParams } from "react-router-dom";
 import MovieCard from "../components/MovieCard.jsx";
-
+import { Container, Row, Col } from "react-bootstrap";
 const WatchlistPage = () => {
   const {
     setUser,
@@ -25,41 +25,47 @@ const WatchlistPage = () => {
 
     fetchData();
   }, [accessWatchlistData]);
+
   useEffect(() => {
     // Wait until accessWatchlistData is populated
-    setAccessWatchlistData(myWatchlistData);
-    // Check if the watchlist is yours
-    const isMyWatchlist = accessWatchlistData.some(
-      (watchlist) => watchlist.id === Number(id)
-    );
+    if (myWatchlistData) {
+      setAccessWatchlistData(myWatchlistData);
+      // Check if the watchlist is yours
+      const isMyWatchlist = accessWatchlistData.some(
+        (watchlist) => watchlist.id === Number(id)
+      );
 
-    // Set the watchlist owner state
+      // Set the watchlist owner state
+      setIsWatchlistOwner(isMyWatchlist);
+    }
+  }, [myWatchlistData, accessWatchlistData, id]);
 
-    setIsWatchlistOwner(isMyWatchlist);
-    console.log(isWatchlistOwner);
-    console.log("use effect:", accessWatchlistData);
-  }, [myWatchlistData, isWatchlistOwner, accessWatchlistData]);
   return (
     <>
       {responseData ? (
         <>
-          <h1>{responseData.data.name}</h1>
-          <div className="flex-container">
-          {responseData.data.movies.map((item) => (
-            
-              <MovieCard
-                key={item.id}
-                movie={item}
-                watchlistId={responseData.data.id}
-                isWatchlistOwner={isWatchlistOwner}
-              />
-            
-           
-          ))}
-          </div>
+          <Container className="text-center">
+            <h1>{responseData.data.name}</h1>
+            <h3>Created by {responseData.data.user.username}</h3>
+            <img
+              className="profile-picture"
+              src={responseData.data.user["profile_picture"]}
+              alt="Profile"
+            />
+            <div className="flex-container">
+              {responseData.data.movies.map((item) => (
+                <MovieCard
+                  key={item.id}
+                  movie={item}
+                  watchlistId={responseData.data.id}
+                  isWatchlistOwner={isWatchlistOwner}
+                />
+              ))}
+            </div>
+          </Container>
         </>
       ) : (
-        <h1>loading...</h1>
+        <></>
       )}
     </>
   );

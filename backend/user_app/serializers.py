@@ -7,4 +7,4 @@ class UserMinimalSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ["username"]
+        fields = ["username","profile_picture"]
