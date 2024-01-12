@@ -82,13 +82,18 @@ const WatchlistCard = (props) => {
         <Card.Text></Card.Text>
       </Card.Body>
       {user ? <Card.Footer>Created By:{user.username}</Card.Footer> : <></>}
-      {myWatchlistData.some((watchlist) => watchlist.id == watchlistId) ? (
+      {
+      myWatchlistData ?
+      myWatchlistData.some((watchlist) => watchlist.id == watchlistId) ? (
         <Button variant="danger" onClick={(e) => handleDelete(e)}>
           Delete
         </Button>
       ) : (
         <></>
-      )}
+      ):
+      <></>
+    
+    }
     </Card>
   );
 };

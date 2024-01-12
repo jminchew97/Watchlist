@@ -11,6 +11,7 @@ const WatchlistPage = () => {
     setAccessWatchlistData,
     myWatchlistData,
   } = useOutletContext();
+  
   const [responseData, setResponseData] = useState(null);
   const [isWatchlistOwner, setIsWatchlistOwner] = useState(false);
   const { id } = useParams();
@@ -46,12 +47,13 @@ const WatchlistPage = () => {
         <>
           <Container className="text-center">
             <h1>{responseData.data.name}</h1>
-            <h3>Created by {responseData.data.user.username}</h3>
+            
             <img
               className="profile-picture"
               src={responseData.data.user["profile_picture"]}
               alt="Profile"
             />
+            <h6>Created by: {responseData.data.user.username}</h6>
             <div className="flex-container">
               {responseData.data.movies.map((item) => (
                 <MovieCard

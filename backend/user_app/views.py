@@ -13,17 +13,15 @@ from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 from watchlist_app.models import Watchlist
 from watchlist_app.serializers import WatchlistSerializer
-from django.utils.safestring import mark_safe
 import requests
-import html
 class Sign_up(APIView):
     def post(self, request):
         url = f"https://api.thecatapi.com/v1/images/search"
         headers={"x-api-key":"live_tpjCWW1x5WMR2HKjX57FrUWghN8BUNHVMHNXrYDWn95UKEmtC26NNRmDnDSZKZs3"}
         response = requests.get(url, headers=headers)
         profile_picture = response.json()[0]["url"]
-        data = request.data
         
+        data = request.data
         data["profile_picture"] = profile_picture
         print(data)
         user = User.objects.create_user(**request.data)

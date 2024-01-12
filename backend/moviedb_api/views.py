@@ -12,8 +12,12 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
-# Create your views here.
+
+from dotenv import dotenv_values
 import requests
+
+MOVIE_API_KEY = dotenv_values()["MOVIE_API_KEY"]
+
 class SearchForMovie(APIView):
     # authentication_classes = [TokenAuthentication]
     # permission_classes = [IsAuthenticated]
@@ -23,9 +27,10 @@ class SearchForMovie(APIView):
     def get(self, request, search_string):
         url = f"https://api.themoviedb.org/3/search/movie?query={search_string}&include_adult=false&language=en-US&page=1"
 
+        print("this is the token", MOVIE_API_KEY)
         headers = {
         "accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1Yzg0OTczMzQyZjA2N2Q4YTllZTAyYTNkMjIzNmFhMSIsInN1YiI6IjY1NjYyNmI4MTU2Y2M3MDEyZDU1MmRhZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GWRa2_qF9X1p6JPSjruqHXToZ1F8UBVbaTcyzsqxwYM"
+        "Authorization": f"Bearer {MOVIE_API_KEY}"
         }
         response = requests.get(url, headers=headers)
         # https://image.tmdb.org/t/p/w500/movie-image-path.jpg

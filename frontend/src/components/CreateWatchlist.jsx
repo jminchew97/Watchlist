@@ -24,6 +24,7 @@ const CreateWatchlist = (props) => {
     if (response.status === 200) {
       props.setAccessWatchlistData([...props.accessWatchlistData, response.data]);
       setDataTrigger(dataTrigger+1)
+      window.location.reload()
     }
     
   };
