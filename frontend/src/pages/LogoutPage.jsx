@@ -5,29 +5,21 @@ import api from "../utilities.jsx";
 // import {api} from ""
 const LogoutPage = () => {
   const navigate = useNavigate();
-  const {setUser, user} = useOutletContext();
- 
- 
-    
+  const { setUser, user } = useOutletContext();
 
-    useEffect(() => {
-      setUser(null)
-      localStorage.removeItem("token")
-      localStorage.removeItem("user")
-      delete api.defaults.headers.common["Authorization"]
-      navigate("/login")
+  useEffect(() => {
+    setUser(null);
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    delete api.defaults.headers.common["Authorization"];
+    navigate("/login");
 
     return () => {
       // Code to run when the component unmounts
-      
     };
   }, []);
- 
 
-  
-  return (
-    <></>
-  );
+  return <></>;
 };
 
 export default LogoutPage;

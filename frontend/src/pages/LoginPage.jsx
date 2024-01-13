@@ -5,7 +5,7 @@ import api from "../utilities.jsx";
 // import {api} from ""
 const LoginForm = () => {
   const navigate = useNavigate();
-  const {setUser, user} = useOutletContext();
+  const { setUser, user } = useOutletContext();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -21,16 +21,16 @@ const LoginForm = () => {
       if (response.status === 200) {
         let user = response.data.user;
         let token = response.data.token;
-        let id = response.data.id
+        let id = response.data.id;
 
-        localStorage.setItem("user", id)
+        localStorage.setItem("user", id);
         localStorage.setItem("token", token);
         api.defaults.headers.common["Authorization"] = `Token ${token}`;
-        console.log(api.defaults.headers.common["Authorization"])
+        console.log(api.defaults.headers.common["Authorization"]);
         setUser({
-          username:user,
-          user_id:id
-        })
+          username: user,
+          user_id: id,
+        });
         navigate("/mywatchlists/");
       }
     } catch (error) {
