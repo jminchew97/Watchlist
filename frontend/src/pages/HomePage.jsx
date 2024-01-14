@@ -14,7 +14,7 @@ const HomePage = () => {
 
         <div className="cta-button">
           <Link to="/watchlist">
-            <Button variant="primary">Explore Your Watchlist</Button>
+            <Button variant="primary">Explore Watchlists</Button>
           </Link>
         </div>
       </section>

@@ -25,7 +25,7 @@ DJANGO_KEY = dotenv_values()["DJANGO_KEY"]
 SECRET_KEY = DJANGO_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 CORS_ALLOW_ALL_ORIGINS = True
 
 ALLOWED_HOSTS = ["*"]
