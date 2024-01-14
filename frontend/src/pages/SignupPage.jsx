@@ -1,5 +1,6 @@
 import { React, useState } from "react";
-import axios from "axios";
+import api from "../utilities.jsx";
+import axios from "axios"
 import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
@@ -14,8 +15,9 @@ const SignupForm = () => {
     e.preventDefault();
     console.log(formData);
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/user/signup/",
+      // const response = await api.post("/user/login/", formData);
+      const response = await api.post(
+        "user/signup/",
         formData
       );
       if (response.status == 201) {

@@ -26,10 +26,11 @@ SECRET_KEY = DJANGO_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+CORS_ALLOW_ALL_ORIGINS = True
 
 ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = 'user_app.User'
-CORS_ALLOW_ALL_ORIGINS = True
+
 
 # Application definition
 
