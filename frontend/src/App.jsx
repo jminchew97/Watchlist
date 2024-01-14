@@ -3,6 +3,7 @@ import { Outlet, Link } from "react-router-dom";
 import { React, useState, useEffect } from "react";
 import api from "./utilities.jsx";
 import { Navbar, Nav } from "react-bootstrap";
+// import { NavbarComponent } from "./components/NavbarComponent.jsx";
 function App() {
   const [user, setUser] = useState(null);
   const [showWatchlistModal, setShowWatchlistModal] = useState(false);
@@ -28,12 +29,12 @@ function App() {
     fetchUserWatchlist();
 
     return () => {};
-  }, [dataTrigger]);
+  }, []);
   return (
     <>
       <Navbar bg="light" expand="lg">
         <Navbar.Brand as={Link} to="/">
-          Watchlister
+          film-vault
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -56,7 +57,7 @@ function App() {
                   Explore Watchlists
                 </Nav.Link>
                 <Nav.Link as={Link} to="/explore">
-                  Explore
+                  Movies
                 </Nav.Link>
                 <Nav.Link as={Link} to="/logout" style={{ color: "red" }}>
                   Logout
