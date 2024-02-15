@@ -7,48 +7,48 @@ const MyWatchlistsPage = () => {
   const { setUser, user, setMyWatchlistData, myWatchlistData,accessWatchlistData, setAccessWatchlistData, setDataTrigger,dataTrigger} = useOutletContext();
   const [responseData, setResponseData] = useState([]);
   
-  useEffect(() => {
-    const fetchData = async () => {
+  // useEffect(() => {
+  //   const fetchData = async () => {
       
-      setDataTrigger(dataTrigger+1)
-      // setAccessWatchlistData(myWatchlistData)
+  //     setDataTrigger(dataTrigger+1)
+  //     // setAccessWatchlistData(myWatchlistData)
     
-    };
+  //   };
 
-    fetchData();
+  //   fetchData();
     
-  }, []); 
-  useEffect(() => {
-    const fetchData = async () => {
-      setAccessWatchlistData(myWatchlistData)
-    };
+  // }, []); 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setAccessWatchlistData(myWatchlistData)
+  //   };
 
-    fetchData();
+  //   fetchData();
     
-  }, [myWatchlistData]); 
+  // }, [myWatchlistData]); 
   return (
     <>
     <CreateWatchlist
-    accessWatchlistData={accessWatchlistData}
-    setAccessWatchlistData={setAccessWatchlistData}
+    myWatchlistData={myWatchlistData}
+    setMyWatchlistData={setMyWatchlistData}
     />
-      {accessWatchlistData ? (
+      {myWatchlistData ? (
         <div className="flex-container">
 
         
-          {accessWatchlistData.map((item, index) => (
+          {myWatchlistData.map((item, index) => (
             <WatchlistCard
               key={index}
               name={item.name}
               movies={item.movies}
               watchlistId={item.id}
-              accessWatchlistData={accessWatchlistData}
-              setAccessWatchlistData={setAccessWatchlistData}
+              myWatchlistData={myWatchlistData}
+              setMyWatchlistData={setMyWatchlistData}
             />
           ))}
         </div>
       ) : (
-        <h1>No watchlists</h1>
+        <h1>Create a watchlist!</h1>
       )}
     </>
   );

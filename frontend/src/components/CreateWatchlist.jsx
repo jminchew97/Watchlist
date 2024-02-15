@@ -7,6 +7,7 @@ const CreateWatchlist = (props) => {
   const [watchlistName, setWatchlistName] = useState('');
   const [isPublic, setIsPublic] = useState(false);
   const {setDataTrigger,dataTrigger} = useOutletContext()
+
   const handleCreateWatchlist = async (e) => {
     e.preventDefault();
     const user = Number(localStorage.getItem('user'));
@@ -22,9 +23,9 @@ const CreateWatchlist = (props) => {
     const response = await api.post('watchlist/', data);
 
     if (response.status === 200) {
-      props.setAccessWatchlistData([...props.accessWatchlistData, response.data]);
-      setDataTrigger(dataTrigger+1)
-      window.location.reload()
+      props.myWatchlistData ? 
+      props.setMyWatchlistData([...props.myWatchlistData, response.data]) :
+      props.setMyWatchlistData([response.data])
     }
     
   };

@@ -21,14 +21,22 @@ function App() {
         api.defaults.headers.common["Authorization"] = `Token ${token}`;
 
         const response = await api.get(`user/${user}/watchlists/`);
-        setMyWatchlistData(response.data.data);
+        
+        response.statusText == "OK" ? setMyWatchlistData(response.data.data) :
+        console.log(response.statusText)
+    
       }
     };
 
     fetchUserWatchlist();
+    
 
     return () => {};
   }, []);
+  useEffect(() => {
+    console.log("watchlist data successfully loaded")
+    console.log(myWatchlistData)
+  }, [myWatchlistData]);
   return (
     <>
       <Navbar bg="light" expand="lg">

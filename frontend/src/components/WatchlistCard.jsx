@@ -11,14 +11,12 @@ const WatchlistCard = (props) => {
     movies,
     key,
     watchlistId,
-    setAccessWatchlistData,
-    accessWatchlistData,
+    myWatchlistData,
+    setMyWatchlistData,
   } = props;
   // const {accessWatchlistData,
   //   setAccessWatchlistData} = useOutletContext()
   const navigate = useNavigate();
-  const { myWatchlistData } = useOutletContext();
-  // const firstThreeMovies = movies.slice(0, 2);
 
   const handleCardClick = () => {
     console.log(`Clicked a watchlist with id:${watchlistId}`);
@@ -41,14 +39,11 @@ const WatchlistCard = (props) => {
       const response = await api.delete(`watchlist/${watchlistId}`);
 
       if (response.status == 204) {
-        console.log("before", accessWatchlistData);
-        const updatedList = accessWatchlistData.filter(
+        const updatedList = myWatchlistData.filter(
           (item) => item.id !== watchlistId
         );
-        setAccessWatchlistData(updatedList);
-        console.log("after", accessWatchlistData);
+        setMyWatchlistData(updatedList);
       } else {
-        // Your logic for canceled action
         console.log("Canceled action");
       }
     }
