@@ -22,7 +22,6 @@ function App() {
 
         const response = await api.get(`user/${user}/watchlists/`);
         setMyWatchlistData(response.data.data);
-        console.log("set new watchlist data");
       }
     };
 
