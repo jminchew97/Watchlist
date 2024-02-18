@@ -19,19 +19,39 @@ import requests
 MOVIE_API_KEY = dotenv_values()["MOVIE_API_KEY"]
 
 class SearchForMovie(APIView):
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
-
-
-    
     def get(self, request, search_string):
         url = f"https://api.themoviedb.org/3/search/movie?query={search_string}&include_adult=false&language=en-US&page=1"
 
-        print("this is the token", MOVIE_API_KEY)
         headers = {
         "accept": "application/json",
         "Authorization": f"Bearer {MOVIE_API_KEY}"
         }
+
         response = requests.get(url, headers=headers)
-        # https://image.tmdb.org/t/p/w500/movie-image-path.jpg
+        return Response(response.json())
+    
+class GetPopularMovies(APIView):
+    
+    def get(self, request):
+        url = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
+        
+        headers = {
+            "accept": "application/json",
+            "Authorization": f"Bearer {MOVIE_API_KEY}"
+            }
+
+        response = requests.get(url, headers=headers)
+        return Response(response.json())
+    
+class TopRated(APIView):
+    
+    def get(self, request):
+        url = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"
+        
+        headers = {
+            "accept": "application/json",
+            "Authorization": f"Bearer {MOVIE_API_KEY}"
+            }
+
+        response = requests.get(url, headers=headers)
         return Response(response.json())

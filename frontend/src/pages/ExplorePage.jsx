@@ -11,7 +11,7 @@ const ExplorePage = () => {
 
   const handleSearch = async (searchTerm) => {
     const encodedUrl = encodeURI(searchTerm);
-    let response = await api.get(`movieapi/${encodedUrl}`);
+    let response = await api.get(`movieapi/search/${encodedUrl}`);
     setResponseData(response.data.results);
   };
 

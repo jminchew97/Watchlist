@@ -4,28 +4,9 @@ import { useOutletContext } from "react-router-dom";
 import WatchlistCard from "../components/WatchlistCard.jsx";
 import CreateWatchlist from "../components/CreateWatchlist.jsx";
 const MyWatchlistsPage = () => {
-  const { setUser, user, setMyWatchlistData, myWatchlistData,accessWatchlistData, setAccessWatchlistData, setDataTrigger,dataTrigger} = useOutletContext();
+  const {setMyWatchlistData, myWatchlistData} = useOutletContext();
   const [responseData, setResponseData] = useState([]);
   
-  // useEffect(() => {
-  //   const fetchData = async () => {
-      
-  //     setDataTrigger(dataTrigger+1)
-  //     // setAccessWatchlistData(myWatchlistData)
-    
-  //   };
-
-  //   fetchData();
-    
-  // }, []); 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setAccessWatchlistData(myWatchlistData)
-  //   };
-
-  //   fetchData();
-    
-  // }, [myWatchlistData]); 
   return (
     <>
     <CreateWatchlist
