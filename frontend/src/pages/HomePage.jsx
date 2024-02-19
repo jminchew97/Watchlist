@@ -1,37 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Container, Button } from "react-bootstrap";
+import WatchlistCarousel from "../components/WatchlistCarousel";
+import { Container, Button, Row } from "react-bootstrap";
+
+import { api } from "../utilities.jsx";
 const HomePage = () => {
+
+
   return (
     <Container className="landing-page text-center">
-      <h1>Welcome to Your Movie Watchlist</h1>
-
-      <section className="hero-section">
-        <p>
-          Discover, save, and share your favorite movies with ease. Create your
-          personalized movie watchlist now!
-        </p>
-
-        <div className="cta-button">
-          <Link to="/watchlist">
-            <Button variant="primary">Explore Watchlists</Button>
-          </Link>
+      <Row>
+        <div className="col-sm center-all div-left">
+          <h1>Explore Watchlists</h1>
+          <p>
+            Explore watchlists created by real users. This is also some more
+            text and stuff.
+          </p>
+          <Button>Explore Watchlists</Button>
         </div>
-      </section>
-
-      <section className="explore-section">
-        <h2>Explore New Movies</h2>
-        <p>
-          Find the latest releases, popular movies, and more. Start exploring
-          and add them to your watchlist.
-        </p>
-
-        <div className="cta-button">
-          <Link to="/explore">
-            <Button variant="secondary">Explore Movies</Button>
-          </Link>
+        <div className="col-sm div-right">
+          <WatchlistCarousel />
         </div>
-      </section>
+      </Row>
+      <Row>
+        <div className="col-sm flex-watchlist-widgets">
+          <WatchlistCarousel />
+        </div>
+        <div className="col-sm">
+          <h1>Explore Movies</h1>
+          <p>
+            Explore watchlists created by real users. This is also some more
+            text and stuff.
+          </p>
+          <Button>Explore Movies</Button>
+        </div>
+      </Row>
     </Container>
   );
 };

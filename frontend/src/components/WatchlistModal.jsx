@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useOutletContext } from "react-router-dom";
-import api from "../utilities.jsx";
+import {api} from "../utilities.jsx";
 import posterNotAvailable from "../assets/posterNotAvailable.jpg"
 const MyModal = (props) => {
   const {

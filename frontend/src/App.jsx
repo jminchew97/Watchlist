@@ -1,7 +1,7 @@
 import "./App.css";
 import { Outlet, Link } from "react-router-dom";
 import { React, useState, useEffect } from "react";
-import api from "./utilities.jsx";
+import {api} from "./utilities.jsx";
 import { Navbar, Nav } from "react-bootstrap";
 // import { NavbarComponent } from "./components/NavbarComponent.jsx";
 function App() {
@@ -9,34 +9,46 @@ function App() {
   const [showWatchlistModal, setShowWatchlistModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [myWatchlistData, setMyWatchlistData] = useState([]);
-  const [accessWatchlistData, setAccessWatchlistData] = useState([]);
-  const [dataTrigger, setDataTrigger] = useState(0);
+  const [allUsersWatchlistsData,setAllUsersWatchlistData] = useState([])
 
   useEffect(() => {
-    const fetchUserWatchlist = async () => {
+    async function fetchUserWatchlist() {
       if (localStorage.getItem("user") && localStorage.getItem("token")) {
         const user = localStorage.getItem("user");
         const token = localStorage.getItem("token");
 
         api.defaults.headers.common["Authorization"] = `Token ${token}`;
 
+        // Fetch user watchlists
         const response = await api.get(`user/${user}/watchlists/`);
         
         response.statusText == "OK" ? setMyWatchlistData(response.data.data) :
-        console.log(response.statusText)
+        console.log(`There was an issue loading watchlist data: ${response.statusText}`)
+
     
       }
+      
     };
+    
+    async function  fetchWatchlistsForHomepage(){
+      const response = await api.get(`watchlist/`);
+      setAllUsersWatchlistData(response.data["watchlists"])
+        response.statusText == "OK" ? setMyWatchlistData(response.data.data) :
+        console.log(`There was an issue loading watchlist data: ${response.statusText}`)
 
+    }
     fetchUserWatchlist();
+    fetchWatchlistsForHomepage();
+    
     
 
-    return () => {};
+  
   }, []);
+  // debug 
+
   useEffect(() => {
-    console.log("watchlist data successfully loaded")
-    console.log(myWatchlistData)
-  }, [myWatchlistData]);
+    
+  }, []);
   return (
     <>
       <Navbar bg="light" expand="lg">
@@ -85,10 +97,7 @@ function App() {
           setSelectedMovie,
           setMyWatchlistData,
           myWatchlistData,
-          accessWatchlistData,
-          setAccessWatchlistData,
-          dataTrigger,
-          setDataTrigger,
+          allUsersWatchlistsData,
         }}
       />
     </>

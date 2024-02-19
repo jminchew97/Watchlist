@@ -1,0 +1,43 @@
+.center-all{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; Optionally, set a specific height for vertical centering */
+}
+.div-left{
+    /* background-color: gray; */
+}
+.div-right{
+    /* background-color: bisque; */
+}
+
+.test-watchlist-widget{
+    background-color: red;
+    width: 100px;
+    height:150px;
+    flex-basis:45%;
+    border-radius: 10px;
+    margin: 1%;
+
+}
+.flex-watchlist-widgets{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;    
+}
+.card{
+    border: none !important;
+    background-color: transparent !important;
+}
+.card-header{
+    border:none !important;
+    
+}
+.card-body{
+    border: none !important;
+}
+.card-footer{
+    border: none !important;
+
+}
