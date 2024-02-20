@@ -47,8 +47,8 @@ function App() {
   // debug 
 
   useEffect(() => {
-    
-  }, []);
+    console.log("successfully loaded all user watchlist data at app leve", allUsersWatchlistsData)
+  }, [allUsersWatchlistsData]);
   return (
     <>
       <Navbar bg="light" expand="lg">

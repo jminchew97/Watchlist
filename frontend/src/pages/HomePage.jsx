@@ -5,8 +5,6 @@ import { Container, Button, Row } from "react-bootstrap";
 
 import { api } from "../utilities.jsx";
 const HomePage = () => {
-
-
   return (
     <Container className="landing-page text-center">
       <Row>
@@ -19,20 +17,23 @@ const HomePage = () => {
           <Button>Explore Watchlists</Button>
         </div>
         <div className="col-sm div-right">
-          <WatchlistCarousel />
+          <div className="container-watchlist-feature">
+            <WatchlistCarousel />
+          </div>
         </div>
       </Row>
       <Row>
         <div className="col-sm flex-watchlist-widgets">
-          <WatchlistCarousel />
+          {/* <WatchlistCarousel /> */}
+          {/* <h1>TODO:Movie carousel</h1> */}
         </div>
         <div className="col-sm">
-          <h1>Explore Movies</h1>
-          <p>
+          {/* <h1>Explore Movies</h1> */}
+          {/* <p>
             Explore watchlists created by real users. This is also some more
             text and stuff.
-          </p>
-          <Button>Explore Movies</Button>
+          </p> */}
+          {/* <Button>Explore Movies</Button> */}
         </div>
       </Row>
     </Container>
