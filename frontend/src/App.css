@@ -6,31 +6,38 @@
     /* height: 100vh; Optionally, set a specific height for vertical centering */
 }
 .div-left{
-    /* background-color: gray; */
+   
 }
 .div-right{
-    
+    /* background-color: red; */
 }
 .container-watchlist-feature{
 /* background-color: bisque; */
 overflow-x: hidden;
-width: 20vw;
-}
+width: 80%;
+margin:auto;
 
-.test-watchlist-widget{
-    background-color: red;
-    width: 100px;
-    height:150px;
-    flex-basis:45%;
-    border-radius: 10px;
-    margin: 1%;
+/* background-color: black; */
+
 
 }
-.flex-watchlist-widgets{
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;    
+
+.watchlist-animator{
+    /* background-color: red; */
+    display:flex;
+    box-shadow: inset 20px 0 15px -10px white, inset -20px 0 15px -10px white;
+    margin-top:15%;
+
 }
+.watchlist-animator img{
+    
+    animation: move-left 30s linear, fade-in 10s;
+    width: 150px;
+    z-index: -1;
+    
+}
+
+
 .card{
     border: none !important;
     background-color: transparent !important;
@@ -49,9 +56,11 @@ width: 20vw;
 @keyframes move-left{
     from{
         transform: translateX(25%);
+
     }
     to{
         transform: translateX(-100%);
+
     }
 }
 @keyframes fade-in {
@@ -63,14 +72,3 @@ width: 20vw;
     }
 }
 
-.watchlist-animator{
-    animation: move-left 20s linear, fade-in 10s;
-    display:flex;
-    
-}
-.watchlist-animator img {
-    width: 150px;
-    z-index: -1;
-    /* position: relative; */
-    
-}
