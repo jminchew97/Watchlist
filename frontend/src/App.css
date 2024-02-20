@@ -1,74 +1,141 @@
-.center-all{
+.center-all {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* height: 100vh; Optionally, set a specific height for vertical centering */
-}
-.div-left{
-   
-}
-.div-right{
-    /* background-color: red; */
-}
-.container-watchlist-feature{
-/* background-color: bisque; */
-overflow-x: hidden;
-width: 80%;
-margin:auto;
-
-/* background-color: black; */
-
 
 }
 
-.watchlist-animator{
-    /* background-color: red; */
-    display:flex;
-    box-shadow: inset 20px 0 15px -10px white, inset -20px 0 15px -10px white;
-    margin-top:15%;
+.div-left h1, p{
 
 }
-.watchlist-animator img{
+#root{
+    animation: fade-in 3s;
+}
+.container-1 {
+    margin-top: 5%;
+    animation: fade-in 3s;
+}
+
+.container-2 {
+    margin-top: 125px;
+    margin-bottom:100px;
+    height: 100%;
+    position: relative;
+    box-shadow: inset 0 -50px 10px -20px rgba(0, 0, 0, 0.5);
+    animation: fade-in 3s;
     
-    animation: move-left 30s linear, fade-in 10s;
-    width: 150px;
+}
+.container-2-row{
+    position: relative;
+    width:100% !important;
+}
+.container-2-content{
+    position:absolute;
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    
+}
+.movie-background-image {
+    /* position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; */
+    margin:auto;
+    width:100%;
+    opacity: 0.5;
+    
+}
+.div-right {
+    width: 100%;
+}
+body {
+    background-color    : black !important;
+}
+h1, h2 ,h3 ,h4 ,a, p{
+    color: white !important;
+}
+
+.container-watchlist-feature {
+    /* background-color: bisque; */
+    overflow-x: hidden;
+    width: 80%;
+    margin:auto;
+    margin-top:100px;
+    /* display: flex; */
+    box-shadow: inset 50px 0 20px -30px black,
+        inset -50px -40px 20px -30px black;
+    justify-content: center;
+    align-items: center;
+}
+
+.watchlist-animator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.watchlist-animator img {
+
+    animation: move-left 30s ease-in-out infinite alternate, fade-in 10s;
+    width: 20vw;
     z-index: -1;
-    
+
+
 }
 
+.watchlist-animator p {
 
-.card{
+    position: absolute;
+    font-size: .7vw;
+    bottom: -16px;
+    right:0px;
+    color: black;
+    /* background-color: black; */
+}
+
+.card {
     border: none !important;
     background-color: transparent !important;
 }
-.card-header{
-    border:none !important;
-    
-}
-.card-body{
-    border: none !important;
-}
-.card-footer{
+
+.card-header {
     border: none !important;
 
 }
-@keyframes move-left{
-    from{
+
+.card-body {
+    border: none !important;
+}
+
+.card-footer {
+    border: none !important;
+
+}
+
+@keyframes move-left {
+    from {
         transform: translateX(25%);
 
     }
-    to{
-        transform: translateX(-100%);
 
+    to {
+        transform: translateX(-50%);
     }
 }
+
 @keyframes fade-in {
-    from{
-        opacity:0.0;
+    from {
+        opacity: 0.0;
     }
-    to{
+
+    to {
         opacity: 1;
     }
 }
-

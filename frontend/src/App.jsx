@@ -51,7 +51,7 @@ function App() {
   }, [allUsersWatchlistsData]);
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="black" expand="lg">
         <Navbar.Brand as={Link} to="/">
           film-vault
         </Navbar.Brand>
