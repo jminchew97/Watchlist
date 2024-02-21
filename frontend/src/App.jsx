@@ -3,6 +3,7 @@ import { Outlet, Link } from "react-router-dom";
 import { React, useState, useEffect } from "react";
 import {api} from "./utilities.jsx";
 import { Navbar, Nav } from "react-bootstrap";
+import filmVaultLogo from './assets/filmVaultLogo.png'
 // import { NavbarComponent } from "./components/NavbarComponent.jsx";
 function App() {
   const [user, setUser] = useState(null);
@@ -53,7 +54,7 @@ function App() {
     <>
       <Navbar bg="black" expand="lg">
         <Navbar.Brand as={Link} to="/">
-          film-vault
+          <img className="logo" src={filmVaultLogo}></img>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

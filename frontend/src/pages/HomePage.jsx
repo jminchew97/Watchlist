@@ -16,7 +16,7 @@ const HomePage = () => {
               Explore watchlists created by real users. This is also some more
               text and stuff.
             </p>
-            <Button>Explore Watchlists</Button>
+            <button>Explore Watchlists</button>
           </div>
           <div className="col-sm div-right">
             <div className="container-watchlist-feature">
@@ -33,7 +33,7 @@ const HomePage = () => {
         <div className="col-sm center-all container-2-content">
             <h1>Explore Movies</h1>
             <p>Explore film-vaults catalog containing millions of movies!</p>
-            <Button>Explore Movies</Button>
+            <button>Explore Movies</button>
           </div>
       </div>
       <Container className="container-2">
