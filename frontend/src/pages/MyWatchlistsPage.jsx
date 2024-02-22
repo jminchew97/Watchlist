@@ -1,5 +1,5 @@
 import { React, useContext, useEffect, useState } from "react";
-import api from "../utilities.jsx";
+import {api} from "../utilities.jsx";
 import { useOutletContext } from "react-router-dom";
 import WatchlistCard from "../components/WatchlistCard.jsx";
 import CreateWatchlist from "../components/CreateWatchlist.jsx";

@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import api from "../utilities.jsx";
+import {api} from "../utilities.jsx";
 
 const WatchlistCard = (props) => {
   const {
@@ -51,10 +51,10 @@ const WatchlistCard = (props) => {
   return (
     <Card
       data-watchlist-id={watchlistId}
-      bg="light"
-      text="black"
+      text="white"
       style={{ width: "18rem" }}
       onClick={handleCardClick}
+      className="watchlist-card"
     >
       <Card.Header as="h5">{name}</Card.Header>
       <Card.Body>

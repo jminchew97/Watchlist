@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
+import {api,imageBaseUrl} from "../utilities"
 import AddToWatchlistButton from "./AddToWatchlistButton";
 import posterNotAvailable from "../assets/posterNotAvailable.jpg"
 const DbMovieCard = (props) => {
@@ -17,7 +18,7 @@ const DbMovieCard = (props) => {
       <Card.Header as="h5">{movie.title}</Card.Header>
       {movie.poster_path ? (
         <Card.Img
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          src={`${imageBaseUrl}${movie.poster_path}`}
         ></Card.Img>
       ) : (
         <Card.Img

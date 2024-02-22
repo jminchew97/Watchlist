@@ -1,47 +1,60 @@
 import "./App.css";
 import { Outlet, Link } from "react-router-dom";
 import { React, useState, useEffect } from "react";
-import api from "./utilities.jsx";
+import {api} from "./utilities.jsx";
 import { Navbar, Nav } from "react-bootstrap";
+import filmVaultLogo from './assets/filmVaultLogo.png'
 // import { NavbarComponent } from "./components/NavbarComponent.jsx";
 function App() {
   const [user, setUser] = useState(null);
   const [showWatchlistModal, setShowWatchlistModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [myWatchlistData, setMyWatchlistData] = useState([]);
-  const [accessWatchlistData, setAccessWatchlistData] = useState([]);
-  const [dataTrigger, setDataTrigger] = useState(0);
+  const [allUsersWatchlistsData,setAllUsersWatchlistData] = useState([])
 
   useEffect(() => {
-    const fetchUserWatchlist = async () => {
+    async function fetchUserWatchlist() {
       if (localStorage.getItem("user") && localStorage.getItem("token")) {
         const user = localStorage.getItem("user");
         const token = localStorage.getItem("token");
 
         api.defaults.headers.common["Authorization"] = `Token ${token}`;
 
+        // Fetch user watchlists
         const response = await api.get(`user/${user}/watchlists/`);
         
         response.statusText == "OK" ? setMyWatchlistData(response.data.data) :
-        console.log(response.statusText)
+        console.log(`There was an issue loading watchlist data: ${response.statusText}`)
+
     
       }
+      
     };
+    
+    async function  fetchWatchlistsForHomepage(){
+      const response = await api.get(`watchlist/`);
+      setAllUsersWatchlistData(response.data["watchlists"])
+        response.statusText == "OK" ? setMyWatchlistData(response.data.data) :
+        console.log(`There was an issue loading watchlist data: ${response.statusText}`)
 
+    }
     fetchUserWatchlist();
+    fetchWatchlistsForHomepage();
+    
     
 
-    return () => {};
+  
   }, []);
+  // debug 
+
   useEffect(() => {
-    console.log("watchlist data successfully loaded")
-    console.log(myWatchlistData)
-  }, [myWatchlistData]);
+    console.log("successfully loaded all user watchlist data at app leve", allUsersWatchlistsData)
+  }, [allUsersWatchlistsData]);
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="black" expand="lg">
         <Navbar.Brand as={Link} to="/">
-          film-vault
+          <img className="logo" src={filmVaultLogo}></img>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -85,10 +98,7 @@ function App() {
           setSelectedMovie,
           setMyWatchlistData,
           myWatchlistData,
-          accessWatchlistData,
-          setAccessWatchlistData,
-          dataTrigger,
-          setDataTrigger,
+          allUsersWatchlistsData,
         }}
       />
     </>

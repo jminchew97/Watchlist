@@ -1,7 +1,7 @@
 import SearchBar from "../components/SearchBar.jsx";
 import DbMovieCard from "../components/DbMovieCard.jsx";
 import WatchlistModal from "../components/WatchlistModal.jsx";
-import api from "../utilities.jsx";
+import {api} from "../utilities.jsx";
 import react, { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";

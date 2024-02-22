@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import api from "../utilities.jsx"
+import {api} from "../utilities.jsx"
 const MovieCard = (props) => {
   const { movie, watchlistId, isWatchlistOwner} = props;
   const navigate = useNavigate();
