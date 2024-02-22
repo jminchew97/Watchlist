@@ -13,7 +13,7 @@
     animation: fade-in 3s;
 }
 .container-1 {
-    margin-top: 5%;
+    margin-top: 2%;
     animation: fade-in 3s;
 }
 
@@ -86,6 +86,7 @@ p{
     /* background-color: bisque; */
     overflow-x: hidden;
     width: 80%;
+    
     margin:auto;
     margin-top:100px;
     /* display: flex; */
@@ -105,7 +106,7 @@ p{
 .watchlist-animator img {
 
     animation: move-left 30s ease-in-out infinite alternate, fade-in 10s;
-    width: 20vw;
+    width: 300px;
     z-index: -1;
 
 

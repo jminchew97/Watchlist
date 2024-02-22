@@ -51,9 +51,10 @@ const WatchlistCard = (props) => {
   return (
     <Card
       data-watchlist-id={watchlistId}
-      text="black"
+      text="white"
       style={{ width: "18rem" }}
       onClick={handleCardClick}
+      className="watchlist-card"
     >
       <Card.Header as="h5">{name}</Card.Header>
       <Card.Body>
