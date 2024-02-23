@@ -30,9 +30,9 @@ const WatchlistPage = () => {
   useEffect(() => {
     // Wait until accessWatchlistData is populated
     if (myWatchlistData) {
-      setAccessWatchlistData(myWatchlistData);
+      // setAccessWatchlistData(myWatchlistData);
       // Check if the watchlist is yours
-      const isMyWatchlist = accessWatchlistData.some(
+      const isMyWatchlist = myWatchlistData.some(
         (watchlist) => watchlist.id === Number(id)
       );
 

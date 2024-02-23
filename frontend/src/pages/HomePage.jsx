@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import WatchlistCarousel from "../components/WatchlistCarousel";
 import { Container, Button, Row } from "react-bootstrap";
 import posterNotAvailable from "../assets/posterNotAvailable.jpg";
 
 import { api } from "../utilities.jsx";
 const HomePage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Container className="container-1 text-center">
@@ -16,7 +17,7 @@ const HomePage = () => {
               Explore watchlists created by real users. This is also some more
               text and stuff.
             </p>
-            <button>Explore Watchlists</button>
+            <button onClick={()=> navigate(`/explorewatchlists`)}>Explore Watchlists</button>
           </div>
           <div className="col-sm div-right">
             <div className="container-watchlist-feature">
@@ -33,7 +34,7 @@ const HomePage = () => {
         <div className="col-sm center-all container-2-content">
             <h1>Explore Movies</h1>
             <p>Explore film-vaults catalog containing millions of movies!</p>
-            <button>Explore Movies</button>
+            <button onClick={() => navigate(`/explore`)}>Explore Movies</button>
           </div>
       </div>
       <Container className="container-2">

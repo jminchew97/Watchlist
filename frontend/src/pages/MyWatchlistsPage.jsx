@@ -2,11 +2,12 @@ import { React, useContext, useEffect, useState } from "react";
 import {api} from "../utilities.jsx";
 import { useOutletContext } from "react-router-dom";
 import WatchlistCard from "../components/WatchlistCard.jsx";
-import CreateWatchlist from "../components/CreateWatchlist.jsx";
+import CreateWatchlist from "../components/CreateWatchlist/CreateWatchlist.jsx";
 const MyWatchlistsPage = () => {
   const {setMyWatchlistData, myWatchlistData} = useOutletContext();
   const [responseData, setResponseData] = useState([]);
   
+
   return (
     <>
     <CreateWatchlist

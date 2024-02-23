@@ -34,8 +34,8 @@ function App() {
     async function  fetchWatchlistsForHomepage(){
       const response = await api.get(`watchlist/`);
       setAllUsersWatchlistData(response.data["watchlists"])
-        response.statusText == "OK" ? setMyWatchlistData(response.data.data) :
-        console.log(`There was an issue loading watchlist data: ${response.statusText}`)
+        // response.statusText == "OK" ? setMyWatchlistData(response.data.data) :
+        // console.log(`There was an issue loading watchlist data: ${response.statusText}`)
 
     }
     fetchUserWatchlist();

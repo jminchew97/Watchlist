@@ -1,12 +1,12 @@
 import SearchBar from "../components/SearchBar.jsx";
 import DbMovieCard from "../components/DbMovieCard.jsx";
-import WatchlistModal from "../components/WatchlistModal.jsx";
+import WatchlistModal from "../components/WatchlistModal/WatchlistModal.jsx";
 import {api} from "../utilities.jsx";
 import react, { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 const ExplorePage = () => {
-  const { accessWatchlistData, setAccessWatchlistData } = useOutletContext();
+  const { accessWatchlistData, setAccessWatchlistData, myWatchlistData} = useOutletContext();
   const [responseData, setResponseData] = useState(null);
 
   const handleSearch = async (searchTerm) => {
@@ -26,7 +26,7 @@ const ExplorePage = () => {
 
       <Row className="mt-3 justify-content-center">
         <Col md={12} className="text-center">
-          <WatchlistModal accessWatchlistData={accessWatchlistData} />
+          <WatchlistModal myWatchlistData={myWatchlistData} />
           <div className="flex-container">
             {responseData ? (
               <>

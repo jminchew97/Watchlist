@@ -15,6 +15,7 @@
 .container-1 {
     margin-top: 2%;
     animation: fade-in 3s;
+
 }
 
 .container-2 {
@@ -24,6 +25,7 @@
     position: relative;
     box-shadow: inset 0 -50px 10px -20px rgba(0, 0, 0, 0.5);
     animation: fade-in 3s;
+    text-align: center;
     
 }
 .container-2-row{
@@ -74,7 +76,7 @@ body {
     background-color    : black !important;
 }
 h1, h2 ,h3 ,h4 ,a{
-    color: white !important;
+    color: white ;
 }
 p{
     color: lightgrey;
@@ -88,7 +90,7 @@ p{
     width: 80%;
     
     margin:auto;
-    margin-top:100px;
+    /* margin-top:100px; */
     /* display: flex; */
     box-shadow: inset 50px 0 20px -30px black,
         inset -50px -40px 20px -30px black;
@@ -106,7 +108,7 @@ p{
 .watchlist-animator img {
 
     animation: move-left 30s ease-in-out infinite alternate, fade-in 10s;
-    width: 300px;
+    width: 20vw;
     z-index: -1;
 
 
@@ -148,7 +150,7 @@ p{
     }
 
     to {
-        transform: translateX(-50%);
+        transform: translateX(-45%);
     }
 }
 
