@@ -119,13 +119,14 @@ class MovieInWatchlist(APIView):
         if not movie.exists():
             # create movie in database
             movie = Movie.objects.create(**data)
-            movie_data = MovieSerializer(movie)
+            
         else:
             movie = movie[0]
         
         watchlist.movies.add(movie)
+        movie_data = MovieSerializer(movie)
         
-        return JsonResponse({"message":True}) #TODO fix this
+        return JsonResponse({"data":movie_data.data}) #TODO fix this
     
     def delete(self, request,watchlist_id, movie_id):
         """delete a movie from a watchlist"""

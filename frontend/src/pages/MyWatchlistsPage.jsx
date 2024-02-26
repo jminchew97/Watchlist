@@ -10,10 +10,7 @@ const MyWatchlistsPage = () => {
 
   return (
     <>
-    <CreateWatchlist
-    myWatchlistData={myWatchlistData}
-    setMyWatchlistData={setMyWatchlistData}
-    />
+  
       {myWatchlistData ? (
         <div className="flex-container">
 

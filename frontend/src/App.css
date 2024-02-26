@@ -75,8 +75,8 @@ button:hover{
 body {
     background-color    : black !important;
 }
-h1, h2 ,h3 ,h4 ,a{
-    color: white ;
+h1, h2 ,h3 ,h4 , a, p {
+    color: white !important;
 }
 p{
     color: lightgrey;
