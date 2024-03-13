@@ -11,6 +11,10 @@
     animation: fade-in 3s;
 }
 
+.fade-in {
+    animation: fade-in 1s;
+}
+
 .container-1 {
     margin-top: 2%;
     animation: fade-in 3s;

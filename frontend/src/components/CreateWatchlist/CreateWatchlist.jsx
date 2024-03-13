@@ -45,8 +45,12 @@ const CreateWatchlist = (props) => {
       
 
       if (addMovieResponse.statusText == "OK") {
+        if (myWatchlistData !== undefined){
+          setMyWatchlistData([...myWatchlistData, addMovieResponse.data.data]);
+        } else {
+          setMyWatchlistData([addMovieResponse.data.data])
+        }
         
-        setMyWatchlistData([...myWatchlistData, addMovieResponse.data.data]);
         // filter out watchlist we just created so we 
         // can place in new watchlist WITH new movie added
         
