@@ -84,9 +84,7 @@ const SignupForm = () => {
               onClick={handleSubmit}
               type="submit"
             >
-           
               Sign Up
-             
             </button>
           </form>
         </Col>
