@@ -1,5 +1,5 @@
 import { React, useContext, useEffect, useState } from "react";
-import api from "../utilities.jsx";
+import {api} from "../utilities.jsx";
 import { useOutletContext, useParams } from "react-router-dom";
 import MovieCard from "../components/MovieCard.jsx";
 import { Container, Row, Col } from "react-bootstrap";

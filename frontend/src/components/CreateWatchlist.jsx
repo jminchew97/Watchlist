@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useOutletContext } from 'react-router-dom';
-import api from '../utilities.jsx';
+import {api} from '../utilities.jsx';
 
 const CreateWatchlist = (props) => {
   const [watchlistName, setWatchlistName] = useState('');

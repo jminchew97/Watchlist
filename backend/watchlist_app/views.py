@@ -20,8 +20,8 @@ from .serializers import WatchlistSerializer,MovieSerializer, CreateWatchlistSer
 from .models import Watchlist,Movie
 
 class AllWatchlists(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
     def get(self, request):
         
         
