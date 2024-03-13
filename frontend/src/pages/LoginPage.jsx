@@ -99,9 +99,9 @@ const LoginForm = () => {
                   type="submit"
                   className="w-100"
                 >
-                 <h3>
+                 
                   Login
-                  </h3>
+                  
                 </button>
               </form>
         </Col>

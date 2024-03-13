@@ -1,5 +1,5 @@
 import "./App.css";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, redirect } from "react-router-dom";
 import { React, useState, useEffect } from "react";
 import {api} from "./utilities.jsx";
 import { Navbar, Nav } from "react-bootstrap";
@@ -17,7 +17,7 @@ function App() {
       if (localStorage.getItem("user") && localStorage.getItem("token")) {
         const user = localStorage.getItem("user");
         const token = localStorage.getItem("token");
-
+        setUser(user)
         api.defaults.headers.common["Authorization"] = `Token ${token}`;
 
         // Fetch user watchlists
@@ -26,7 +26,6 @@ function App() {
         response.statusText == "OK" ? setMyWatchlistData(response.data.data) :
         console.log(`There was an issue loading watchlist data: ${response.statusText}`)
 
-    
       }
       
     };
@@ -59,7 +58,7 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            {!localStorage.getItem("user") ? (
+            {user == null ? (
               <>
                 <Nav.Link as={Link} to="/login">
                   Login
@@ -79,7 +78,7 @@ function App() {
                 <Nav.Link as={Link} to="/explore">
                   Movies
                 </Nav.Link>
-                <Nav.Link as={Link} to="/logout" style={{ color: "red" }}>
+                <Nav.Link as={Link}  to="/logout" >
                   Logout
                 </Nav.Link>
               </>

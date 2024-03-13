@@ -84,9 +84,9 @@ const SignupForm = () => {
               onClick={handleSubmit}
               type="submit"
             >
-              <h3>
+           
               Sign Up
-              </h3>
+             
             </button>
           </form>
         </Col>

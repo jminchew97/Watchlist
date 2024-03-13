@@ -17,7 +17,7 @@ const ExplorePage = () => {
   };
 
   return (
-    <Container className="">
+    <Container className="movie-search-container">
       <Row className="">
         <Col>
           <SearchBar onSearch={handleSearch} />

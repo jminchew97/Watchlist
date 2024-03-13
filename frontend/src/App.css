@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    animation: fade-in 2s;
 }
 
 
@@ -206,6 +206,12 @@ p {
 .btn-close{
     background-color: white !important;
 }
+.db-movie-card{
+    box-shadow: 0px 0px 10px  	rgb(105,105,105, 0.5) !important;
+    animation: fade-in 1s;
+    
+}
+
 .search-movie-component {
     display: flex;
     flex-direction: column;
