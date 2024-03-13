@@ -1,12 +1,13 @@
 import SearchBar from "../components/SearchBar.jsx";
 import DbMovieCard from "../components/DbMovieCard.jsx";
 import WatchlistModal from "../components/WatchlistModal/WatchlistModal.jsx";
-import {api} from "../utilities.jsx";
+import { api } from "../utilities.jsx";
 import react, { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 const ExplorePage = () => {
-  const { accessWatchlistData, setAccessWatchlistData, myWatchlistData} = useOutletContext();
+  const { accessWatchlistData, setAccessWatchlistData, myWatchlistData } =
+    useOutletContext();
   const [responseData, setResponseData] = useState(null);
 
   const handleSearch = async (searchTerm) => {
@@ -16,10 +17,9 @@ const ExplorePage = () => {
   };
 
   return (
-    <Container className="mt-5">
-      <Row className="justify-content-center">
-        <Col md={12} className="text-center">
-          <h1>Search for a movie title</h1>
+    <Container className="">
+      <Row className="">
+        <Col>
           <SearchBar onSearch={handleSearch} />
         </Col>
       </Row>

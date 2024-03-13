@@ -6,12 +6,11 @@
 
 }
 
-.div-left h1, p{
 
-}
-#root{
+#root {
     animation: fade-in 3s;
 }
+
 .container-1 {
     margin-top: 2%;
     animation: fade-in 3s;
@@ -20,76 +19,86 @@
 
 .container-2 {
     margin-top: 125px;
-    margin-bottom:100px;
+    margin-bottom: 100px;
     height: 100%;
     position: relative;
     box-shadow: inset 0 -50px 10px -20px rgba(0, 0, 0, 0.5);
     animation: fade-in 3s;
     text-align: center;
-    
-}
-.container-2-row{
-    position: relative;
-    width:100% !important;
-}
-.container-2-content{
-    position:absolute;
-    position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-    
-}
-.movie-background-image {
-    /* position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1; */
-    margin:auto;
-    width:100%;
-    opacity: 0.3;
-    
-}
-button {
-    background:none;
-	color: #00BFFF;
-    
-	border: none;
-	padding: 15px;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-    transition: .3s;
 
 }
-button:hover{
-    background-color: #00BFFF;
-    color:black;
+
+.container-2-row {
+    position: relative;
+    width: 100% !important;
 }
+
+.container-2-content {
+    position: absolute;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.movie-background-image {
+    margin: auto;
+    width: 100%;
+    opacity: 0.3;
+}
+
+button {
+    background-color:  #FF6000;
+    color: black;
+    border: none;
+    padding: 15px;
+    font: inherit;
+    outline: inherit;
+    transition: .3s;
+
+    /*  */
+    font-family: "Roboto", sans-serif;
+    font-weight: 600 !important;
+    font-style: normal !important;
+    /*  */
+}
+
+button:hover p {
+    color:white !important;
+}
+
 .div-right {
     width: 100%;
 }
+
 body {
-    background-color    : black !important;
+    background-color: black !important;
 }
-h1, h2 ,h3 ,h4 , a, p {
+
+h1,
+h2,
+h3,
+h4,
+a,
+p {
     color: white !important;
 }
-p{
+
+p {
     color: lightgrey;
 }
-.logo{
-    width:175px;
+
+.logo {
+    width: 175px;
 }
+
 .container-watchlist-feature {
     /* background-color: bisque; */
     overflow-x: hidden;
     width: 80%;
-    
-    margin:auto;
+
+    margin: auto;
     /* margin-top:100px; */
     /* display: flex; */
     box-shadow: inset 50px 0 20px -30px black,
@@ -119,7 +128,7 @@ p{
     position: absolute;
     font-size: .7vw;
     bottom: -16px;
-    right:0px;
+    right: 0px;
     color: black;
     /* background-color: black; */
 }
@@ -162,4 +171,83 @@ p{
     to {
         opacity: 1;
     }
+}
+
+.watchlist-card {
+    text-align: center;
+    /* box-shadow: 0px 0px 20px  	rgb(105,105,105, 0.5) !important; */
+    width: 500px !important;
+    margin: 50px;
+    transition: .3s;
+    animation: fade-in 3s;
+    background-color: rgba(34,40,49, .6) !important;
+}
+.watchlist-card:hover {
+    text-align: center;
+    box-shadow: 0px 0px 25px  	rgb(255,255,255) !important;
+    
+    margin: 50px;
+}
+.movie-card-watchlist{
+    
+    text-align: center;
+    box-shadow: 0px 0px 20px  	rgb(105,105,105, 0.5) !important;
+    
+    margin: 50px;
+    transition: .3s;
+    animation: fade-in 3s;
+}
+.movie-card-watchlist:hover {
+    text-align: center;
+    box-shadow: 0px 0px 40px  	rgb(255,255,255, 1) !important;
+    
+    margin: 50px;
+}
+.btn-close{
+    background-color: white !important;
+}
+.search-movie-component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.checkbox{
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    -o-appearance: none !important;
+    appearance: none !important;
+}
+.search-movie-component input {
+    width: 50%
+}
+
+p {
+    font-family: "Roboto", sans-serif !important;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h1 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 800 !important;
+    font-style: normal !important;
+}
+
+h2 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 600 !important;
+    font-style: normal !important;
+}
+h3 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400 !important;
+    font-style:  normal !important;
+}
+::placeholder {
+    color: lightgray !important;
+    opacity: .8 !important;
+}
+.spec-color {
+    color: #00BFFF ;
 }

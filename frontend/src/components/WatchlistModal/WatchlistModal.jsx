@@ -44,7 +44,13 @@ const MyModal = (props) => {
       data: data,
     });
     if (response.status == 200) {
-      console.log("WORKED!!");
+      console.log("before", myWatchlistData);
+      //replace watchlist with new watchlist with updated movies
+      const newWatchlistData = myWatchlistData.filter((wlist) => wlist.id !== watchlist.id)
+      console.log("after", newWatchlistData)
+      setMyWatchlistData([...newWatchlistData, response.data.data])
+      
+
     }
     setShowWatchlistModal(false);
   };
@@ -55,24 +61,23 @@ const MyModal = (props) => {
   };
 
   useEffect(() => {
-    console.log("myWatchlistData changed",myWatchlistData)
-  }, [myWatchlistData])
+    console.log("myWatchlistData changed", myWatchlistData);
+  }, [myWatchlistData]);
   return (
     <>
       <Modal show={showWatchlistModal} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="bg-dark text-light border-0">
           <Modal.Title>
             {addToWatchlistState ? (
-              <>Select Watchlist </>
+              <h3>Select Watchlist</h3>
             ) : (
-              <>Create new watchlist</>
+              <h3>Create watchlist</h3>
             )}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="bg-dark text-light ">
           {addToWatchlistState ? (
             <ul>
-             
               {myWatchlistData ? (
                 <ul className="watchlist-selection-list">
                   {myWatchlistData.map((item, index) => (
@@ -86,7 +91,7 @@ const MyModal = (props) => {
                 <>
                   <p>No watchlists available.</p>
                 </>
-              )} 
+              )}
             </ul>
           ) : (
             <CreateWatchlist
@@ -99,13 +104,10 @@ const MyModal = (props) => {
               setNewWatchlistState={setNewWatchlistState}
               setMyWatchlistData={setMyWatchlistData}
               myWatchlistData={myWatchlistData}
-              
-              
-              
             />
           )}
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="bg-dark text-light border-0">
           {addToWatchlistState ? (
             <button onClick={handleNewWatchlistButton}>new</button>
           ) : (

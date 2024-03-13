@@ -13,9 +13,9 @@ const AddToWatchlistButton = (props) => {
   };
 
   return (
-    <Button variant="primary" onClick={handleClick}>
+    <button onClick={handleClick}>
       +watchlist
-    </Button>
+    </button>
   );
 };
 

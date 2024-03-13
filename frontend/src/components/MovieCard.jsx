@@ -38,14 +38,14 @@ const MovieCard = (props) => {
     <Card
       data-movie-id={movie.id}
       data-watchlist-id={watchlistId}
-      bg="dark"
-      text="white"
+      className="movie-card-watchlist"
+      text="light"
       style={{ width: "18rem" }}
       onClick={handleCardClick}
     >
       <Card.Header as="h5">{movie.name}</Card.Header>
       <Card.Img src={movie["img_src"]}></Card.Img>
-      <Card.Body>
+      <Card.Body >
         <Card.Text>{movie.summary}</Card.Text>
         <Card.Text>Release Date:{movie.release_date}</Card.Text>
       </Card.Body>

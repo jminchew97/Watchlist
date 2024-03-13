@@ -18,8 +18,8 @@ const WatchlistPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      api.defaults.headers.common["Authorization"] = `Token ${token}`;
+      // const token = localStorage.getItem("token");
+      // api.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await api.get(`/watchlist/${id}`);
       setResponseData(response.data);
     };
@@ -30,7 +30,6 @@ const WatchlistPage = () => {
   useEffect(() => {
     // Wait until accessWatchlistData is populated
     if (myWatchlistData) {
-      // setAccessWatchlistData(myWatchlistData);
       // Check if the watchlist is yours
       const isMyWatchlist = myWatchlistData.some(
         (watchlist) => watchlist.id === Number(id)
@@ -53,7 +52,7 @@ const WatchlistPage = () => {
               src={responseData.data.user["profile_picture"]}
               alt="Profile"
             />
-            <h6>Created by: {responseData.data.user.username}</h6>
+            <p>By <b>{responseData.data.user.username}</b></p>
             <div className="flex-container">
               {responseData.data.movies.map((item) => (
                 <MovieCard

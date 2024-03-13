@@ -12,9 +12,10 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <Form onSubmit={handleSearch} inline>
-      <FormControl type="text" placeholder="Search" autoComplete="off" className="mr-sm-2" name="searchTerm" />
-      <Button type="submit" variant="outline-success">Search</Button>
+    <Form onSubmit={handleSearch}className='search-movie-component'>
+      <h1>Search for a movie title</h1>
+      <FormControl type="text" placeholder="movie name" autoComplete="off" className="mb-4 bg-dark text-light border-light" name="searchTerm" />
+      <button type="submit" variant="outline-success">Search </button>
     </Form>
   );
 };

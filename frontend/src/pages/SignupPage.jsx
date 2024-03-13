@@ -1,7 +1,8 @@
 import { React, useState } from "react";
-import {api} from "../utilities.jsx";
-import axios from "axios"
+import { api } from "../utilities.jsx";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -16,10 +17,7 @@ const SignupForm = () => {
     console.log(formData);
     try {
       // const response = await api.post("/user/login/", formData);
-      const response = await api.post(
-        "user/signup/",
-        formData
-      );
+      const response = await api.post("user/signup/", formData);
       if (response.status == 201) {
         navigate("/login");
       }
@@ -39,62 +37,61 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card bg-dark text-light">
-            <div className="card-body">
-              <h2 className="card-title text-center text-primary">Sign Up</h2>
-              <form>
-                <div className="mb-3">
-                  <label htmlFor="username" className="form-label">
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control bg-dark text-light border-light"
-                    id="username"
-                    onChange={handleInputChange}
-                    value={formData.username}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control bg-dark text-light border-light"
-                    id="email"
-                    onChange={handleInputChange}
-                    value={formData.email}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label">
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control bg-dark text-light border-light"
-                    id="password"
-                    onChange={handleInputChange}
-                    value={formData.password}
-                  />
-                </div>
-                <button
-                  onClick={handleSubmit}
-                  type="submit"
-                  className="btn btn-primary w-100"
-                >
-                  Sign Up
-                </button>
-              </form>
+    <Container>
+      <Row>
+        <Col>
+          <form className="center-all">
+            <div className="mb-3">
+              <label htmlFor="username" className="form-label">
+              
+              </label>
+              <input
+                type="text"
+                className="form-control bg-dark text-light border-light"
+                id="username"
+                onChange={handleInputChange}
+                value={formData.username}
+                placeholder="username"
+              />
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+             
+              </label>
+              <input
+                type="email"
+                className="form-control bg-dark text-light border-light"
+                id="email"
+                onChange={handleInputChange}
+                value={formData.email}
+                placeholder="email"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+            
+              </label>
+              <input
+                type="password"
+                className="form-control bg-dark text-light border-light"
+                id="password"
+                onChange={handleInputChange}
+                value={formData.password}
+                placeholder="password"
+              />
+            </div>
+            <button
+              onClick={handleSubmit}
+              type="submit"
+            >
+              <h3>
+              Sign Up
+              </h3>
+            </button>
+          </form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

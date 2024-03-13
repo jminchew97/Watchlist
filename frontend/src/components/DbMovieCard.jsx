@@ -9,11 +9,11 @@ const DbMovieCard = (props) => {
   const handleCardClick = () => {};
   return (
     <Card
-      bg="dark"
+    
       text="white"
-      style={{ width: "18rem" }}
+      
       onClick={handleCardClick}
-      className="flex-item"
+      className="flex-item "
     >
       <Card.Header as="h5">{movie.title}</Card.Header>
       {movie.poster_path ? (

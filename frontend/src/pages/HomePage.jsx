@@ -12,11 +12,10 @@ const HomePage = () => {
       <Container className="container-1 text-center">
         <Row className="row-1">
           <div className="col-sm center-all div-left">
-            <h1>Explore Watchlists</h1>
-            <p>
-              Explore watchlists created by real users. This is also some more
-              text and stuff.
-            </p>
+            <h1 className="text-light">Explore Watchlists</h1>
+            <h3 className="text-light">
+              Explore watchlists created by real users. Create your own and share them with the world!
+            </h3>
             <button onClick={()=> navigate(`/explorewatchlists`)}>Explore Watchlists</button>
           </div>
           <div className="col-sm div-right">

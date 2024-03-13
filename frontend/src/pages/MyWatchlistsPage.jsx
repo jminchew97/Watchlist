@@ -3,6 +3,7 @@ import {api} from "../utilities.jsx";
 import { useOutletContext } from "react-router-dom";
 import WatchlistCard from "../components/WatchlistCard.jsx";
 import CreateWatchlist from "../components/CreateWatchlist/CreateWatchlist.jsx";
+import { Col, Container, Row } from "react-bootstrap";
 const MyWatchlistsPage = () => {
   const {setMyWatchlistData, myWatchlistData} = useOutletContext();
   const [responseData, setResponseData] = useState([]);
@@ -27,7 +28,10 @@ const MyWatchlistsPage = () => {
           ))}
         </div>
       ) : (
-        <h1>Create a watchlist!</h1>
+       
+        <div className="center-all" >
+            <h3>You currently have <i>no watchlists</i> . To create one, go to the <i><b>Movies</b></i> tab and search for a title to add.</h3>
+        </div>
       )}
     </>
   );

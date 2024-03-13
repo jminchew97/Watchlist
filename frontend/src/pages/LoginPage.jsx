@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { Container, Button, Row, Col } from "react-bootstrap";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import {api} from "../utilities.jsx";
+import { api } from "../utilities.jsx";
 // import {api} from ""
 const LoginForm = () => {
   const navigate = useNavigate();
-  const { setUser, user } = useOutletContext();
+  const { setUser, user, setMyWatchlistData} = useOutletContext();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -31,6 +31,20 @@ const LoginForm = () => {
           username: user,
           user_id: id,
         });
+
+        if (localStorage.getItem("user") && localStorage.getItem("token")) {
+          const user = localStorage.getItem("user");
+          const token = localStorage.getItem("token");
+  
+          api.defaults.headers.common["Authorization"] = `Token ${token}`;
+  
+          // Fetch user watchlists
+          const response = await api.get(`user/${user}/watchlists/`);
+          
+          response.statusText == "OK" ? setMyWatchlistData(response.data.data) :
+          console.log(`There was an issue loading watchlist data: ${response.statusText}`)
+
+        }
         navigate("/mywatchlists/");
       }
     } catch (error) {
@@ -49,28 +63,26 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card bg-dark text-light">
-            <div className="card-body">
-              <h2 className="card-title text-center text-primary">Login</h2>
-              <form>
+    <Container className="center-all">
+      <Row>
+        <Col>
+          <form>
                 <div className="mb-3">
-                  <label htmlFor="username" className="form-label">
-                    Username
+                  <label htmlFor="username"className="form-label">
+      
                   </label>
                   <input
                     type="text"
                     className="form-control bg-dark text-light border-light"
                     id="username"
                     onChange={handleInputChange}
+                    placeholder="username"
                     value={formData.username}
                   />
                 </div>
-                <div className="mb-3">
+                <div className="mb-5">
                   <label htmlFor="password" className="form-label">
-                    Password
+                   
                   </label>
                   <input
                     type="password"
@@ -78,21 +90,24 @@ const LoginForm = () => {
                     id="password"
                     onChange={handleInputChange}
                     value={formData.password}
+                    placeholder="password"
+
                   />
                 </div>
                 <button
                   onClick={handleSubmit}
                   type="submit"
-                  className="btn btn-primary w-100"
+                  className="w-100"
                 >
+                 <h3>
                   Login
+                  </h3>
                 </button>
               </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        </Col>
+      </Row>
+    </Container>
+
   );
 };
 
