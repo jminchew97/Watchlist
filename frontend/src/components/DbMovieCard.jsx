@@ -3,17 +3,24 @@ import { Card, Button } from "react-bootstrap";
 import {api,imageBaseUrl} from "../utilities"
 import AddToWatchlistButton from "./AddToWatchlistButton";
 import posterNotAvailable from "../assets/posterNotAvailable.jpg"
+import { useNavigate, useOutletContext } from "react-router-dom";
+
+ 
+
+
 const DbMovieCard = (props) => {
   const { movie } = props;
+  const { setUser, user, setMyWatchlistData} = useOutletContext();
+  const navigate = useNavigate();
 
   const handleCardClick = () => {};
   return (
     <Card
-      bg="dark"
+    
       text="white"
-      style={{ width: "18rem" }}
+      
       onClick={handleCardClick}
-      className="flex-item"
+      className="flex-item db-movie-card"
     >
       <Card.Header as="h5">{movie.title}</Card.Header>
       {movie.poster_path ? (
@@ -29,7 +36,12 @@ const DbMovieCard = (props) => {
       <Card.Body>
         <Card.Text>{movie.overview.slice(0,255) + "..."}</Card.Text>
         <Card.Text>Release Date:{movie.release_date}</Card.Text>
-        <AddToWatchlistButton movie={movie} />
+        {
+          user == null ?
+          <button onClick={() => navigate("/login")}>Sign up to add to a watchlist</button> :
+      <AddToWatchlistButton movie={movie} />
+        }
+        
       </Card.Body>
     </Card>
   );

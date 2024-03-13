@@ -55,8 +55,8 @@ class AllWatchlists(APIView):
         
 class SingleWatchlist(APIView):
 
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
     
     def get(self, request, id):
         
@@ -110,8 +110,6 @@ class MovieInWatchlist(APIView):
         watchlist = get_object_or_404(Watchlist, id=watchlist_id)
         current_movies = list([x.id for x in watchlist.movies.all()])
         
-        
-       
         movie = Movie.objects.filter(name=data['name'], release_date=data["release_date"])
         """
         If the movie does not exist we will create a new movie object in our database.
@@ -119,13 +117,15 @@ class MovieInWatchlist(APIView):
         if not movie.exists():
             # create movie in database
             movie = Movie.objects.create(**data)
-            movie_data = MovieSerializer(movie)
+            
         else:
             movie = movie[0]
         
         watchlist.movies.add(movie)
-        
-        return JsonResponse({"message":True}) #TODO fix this
+        movie_data = MovieSerializer(movie)
+        watchlist_data = WatchlistSerializer(watchlist)
+        # return JsonResponse({"data":movie_data.data}) #TODO fix this
+        return JsonResponse({"data":watchlist_data.data}) #TODO fix this
     
     def delete(self, request,watchlist_id, movie_id):
         """delete a movie from a watchlist"""

@@ -18,8 +18,8 @@ const OthersWatchlists = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      api.defaults.headers.common["Authorization"] = `Token ${token}`;
+      // const token = localStorage.getItem("token");
+      // api.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await api.get(`/watchlist/`);
       console.log(response);
       setResponseData(response.data);

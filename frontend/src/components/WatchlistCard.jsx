@@ -55,10 +55,11 @@ const WatchlistCard = (props) => {
       style={{ width: "18rem" }}
       onClick={handleCardClick}
       className="watchlist-card"
+
     >
-      <Card.Header as="h5">{name}</Card.Header>
+      <Card.Header className="" as="h3">{name}</Card.Header>
       <Card.Body>
-        <div className="flex-container">
+        <div className="flex-container b">
           {movies ? (
             <>
               {movies.slice(0, 4).map((item, index) => (
@@ -76,11 +77,11 @@ const WatchlistCard = (props) => {
 
         <Card.Text></Card.Text>
       </Card.Body>
-      {user ? <Card.Footer>Created By:{user.username}</Card.Footer> : <></>}
+      {user ? <Card.Footer><p>By ~ <b>{user.username}</b></p></Card.Footer> : <></>}
       {
       myWatchlistData ?
       myWatchlistData.some((watchlist) => watchlist.id == watchlistId) ? (
-        <Button variant="danger" onClick={(e) => handleDelete(e)}>
+        <Button variant="danger"  onClick={(e) => handleDelete(e)}>
           Delete
         </Button>
       ) : (
